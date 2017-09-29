@@ -10,8 +10,7 @@ public class Chatbot {
 		Derek = new ChatbotDerek();
 		username = "Unknown User";
 		chatting = true;		
-	}
-
+	}  
 	public String getUsername() {
 		return username;
 	}
