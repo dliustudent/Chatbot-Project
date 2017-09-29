@@ -28,7 +28,7 @@ public class ChatbotVin implements Topic {
 				response = ChatbotMain.getInput();
 				}
 		}
-		//access variable from other classess
+		//access variable from other classess 
 		ChatbotMain.print("Well it was nice talking to you, "+ ChatbotMain.chatbot.getUsername()+"!");
 	}
 	
