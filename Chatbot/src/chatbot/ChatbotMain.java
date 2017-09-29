@@ -6,6 +6,7 @@ public class ChatbotMain {
 
 	public static final Chatbot chatbot = new Chatbot();
 	private static Scanner inputSource = new Scanner(System.in);
+	//use static only if it is the same everywhere, wants it to be accessed independent of instances
 	
 	public static void main(String[] args) {
 	chatbot.startChatting();
@@ -16,6 +17,7 @@ public class ChatbotMain {
 	/*
 	 * @return the index of the keyword after startPsn that is isolated and has no negations or -1 otherwise
 	 */
+	
 	public static int findKeyword(String searchString, String keyword, int startPsn) {
 		//make lower case
 		searchString = searchString.toLowerCase();
@@ -29,9 +31,11 @@ public class ChatbotMain {
 			}else {
 				psn = searchString.indexOf(keyword, psn+1);//returns the index of the NEXT keyword
 			}
+		}
 			return -1;
+			
 	}
-	}
+
 	public static boolean keywordIsIsolated(int psn, String keyword, String s){
 			return true;
 		}
@@ -106,4 +110,4 @@ public class ChatbotMain {
 
 	}
 
-}
+

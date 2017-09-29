@@ -9,10 +9,16 @@ public class Chatbot {
 	public Chatbot() {
 		Derek = new ChatbotDerek();
 		username = "Unknown User";
-		chatting = true;
-		
+		chatting = true;		
 	}
 
+	public String getUsername() {
+		return username;
+	}
+	
+	public Topic getDerek() {
+		return Derek;
+	}
 	public void startChatting() {
 		ChatbotMain.print("Hi! I am an inteligent machine that can respond to your input. What is your name?");
 		username = ChatbotMain.getInput();
