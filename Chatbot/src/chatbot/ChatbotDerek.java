@@ -25,7 +25,7 @@ public class ChatbotDerek implements Topic {
 		}
 		return false;
 	}
-
+ 
 	public void talk(String response) {
 		ChatbotMain.print("Hey! So you want to talk about generic boring things, huh? I love talking about that. So tell me more!");
 		response = ChatbotMain.getInput();
