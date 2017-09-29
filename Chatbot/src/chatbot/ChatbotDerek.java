@@ -23,7 +23,7 @@ public class ChatbotDerek implements Topic {
 				return true;
 			}
 		}
-		return false;
+		return false; 
 	}
  
 	public void talk(String response) {
