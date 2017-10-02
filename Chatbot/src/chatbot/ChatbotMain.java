@@ -32,7 +32,7 @@ public class ChatbotMain {
 					psn = searchString.indexOf(keyword, psn+1);//returns the index of the NEXT keyword
 				}
 			}
-				return -1;
+				return -1; 
 				
 		}
 	

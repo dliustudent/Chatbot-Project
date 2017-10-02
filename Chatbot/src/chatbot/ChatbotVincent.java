@@ -9,7 +9,7 @@ public class ChatbotVincent implements Topic {
 	
 	
 	public ChatbotVincent() {
-		String[] temp = {"adc","things","whatever","nothing"};
+		String[] temp = {"Lion","things","whatever","nothing"};
 		keywords = temp;
 		goodbyeKeyword = "bye";
 		secretKeyword = "pug";
@@ -17,7 +17,7 @@ public class ChatbotVincent implements Topic {
 	}
 	
 	public void talk(String response) {
-		ChatbotMain.print("Hey! So you want to talk about, ...");
+		ChatbotMain.print("Hey! What Mammals do you want to talk about?");
 		response = ChatbotMain.getInput();
 		while(!response.equals(goodbyeKeyword)) {
 				if(ChatbotMain.findKeyword(response, secretKeyword, 0) >= 0) {
