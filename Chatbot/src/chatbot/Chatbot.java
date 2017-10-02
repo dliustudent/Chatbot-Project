@@ -42,7 +42,7 @@ public class Chatbot {
 		ChatbotMain.print("Hi! I am an inteligent machine that can respond to your input. What is your name?");
 		username = ChatbotMain.getInput();
 		while(chatting) {
-			ChatbotMain.print("What would you like to talk about?");
+			ChatbotMain.print("What type of animal do you want to talk about?");
 			String response = ChatbotMain.getInput();
 			if(Derek.isTriggered(response)) {
 				chatting = false; //exits the while loop, IMPORTANT FOR GRADE
