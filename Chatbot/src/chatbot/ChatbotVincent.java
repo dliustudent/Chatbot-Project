@@ -1,6 +1,6 @@
 package chatbot;
 
-public class ChatbotVin implements Topic {
+public class ChatbotVincent implements Topic {
 
 	private String[] keywords;
 	private String goodbyeKeyword;
@@ -8,7 +8,7 @@ public class ChatbotVin implements Topic {
 	private String response;
 	
 	
-	public ChatbotVin() {
+	public ChatbotVincent() {
 		String[] temp = {"stuff","things","whatever","nothing"};
 		keywords = temp;
 		goodbyeKeyword = "bye";
