@@ -9,7 +9,7 @@ public class ChatbotVincent implements Topic {
 	
 	
 	public ChatbotVincent() {
-		String[] temp = {"stuff","things","whatever","nothing"};
+		String[] temp = {"adc","things","whatever","nothing"};
 		keywords = temp;
 		goodbyeKeyword = "bye";
 		secretKeyword = "pug";
