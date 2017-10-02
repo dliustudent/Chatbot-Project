@@ -4,12 +4,24 @@ public class ChatbotRaymond implements Topic {
 	
 	private String[] keywords;
 	private String goodbyeKeyword;
+	private String[] vowels;
+	private String[] insults;
 	private String secretKeyword;
 	private String response;
+	boolean vowelsFound;
 	
 	public ChatbotRaymond() {
-		String[] temp = {"abc", "things", "whatever", "nothing"};
+		String[] temp = {"insects","bugs","flys","ant","butterfly","bee","mosquito"};
 		keywords = temp;
+		
+		String[] tempVowels = {"a","e","i","o","u"};
+		vowels = tempVowels;
+		
+		String[] tempInsults = {"stupid", "idiot", "dumb"};
+		insults = tempInsults;
+		
+		vowelsFound = false;
+		
 		goodbyeKeyword = "bye";
 		secretKeyword = "pug";
 		response = "";
@@ -17,8 +29,9 @@ public class ChatbotRaymond implements Topic {
  
 	@Override
 	public void talk(String response) {
-		ChatbotMain.print("Hey! So you want to talk about generic boring things, huh? I love talkign about that. So tell me something.");
+		ChatbotMain.print("I love talking about insects.");
 		response = ChatbotMain.getInput();
+		isGibberish(response);
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0) == -1) {
 			if(ChatbotMain.findKeyword(response, secretKeyword, 0) >= 0) {
 				ChatbotMain.print("I can't even. I love pugs so much. Wow. You are so cool.");
@@ -41,6 +54,17 @@ public class ChatbotRaymond implements Topic {
 			}
 		}
 		return false;
+	}
+	public boolean isGibberish(String response) {
+		if(response.indexOf(" ") == -1) {
+			for(int i = 0; i < vowels.length; i++) {
+				if(response.contains(vowels[i])) {
+					vowelsFound = true;
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 }
