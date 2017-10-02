@@ -1,4 +1,4 @@
-package chatbot;
+package chatbot; 
 
 public class Chatbot {
 
@@ -47,42 +47,31 @@ public class Chatbot {
 			if(Derek.isTriggered(response)) {
 				chatting = false; //exits the while loop, IMPORTANT FOR GRADE
 				Derek.talk(response);
-			}else {
-				ChatbotMain.print("I'm sorry. I don't understand. I never said i was perfect.");
 			}
+			else if (David.isTriggered(response)) {
+				chatting = false;
+				David.talk(response);
+			}
+			else if (Vincent.isTriggered(response)) {
+				chatting = false;
+				Vincent.talk(response);
+			}
+			else if (Raymond.isTriggered(response)) {
+				chatting = false;
+				Raymond.talk(response);
+			}
+			else 
+			{
+			ChatbotMain.print("Im sorry i never said i was perfect.");
+			}
+			
+			
 		}
-	while(chatting) {
-		ChatbotMain.print("What would you like to talk about?");
-		String response = ChatbotMain.getInput();
-		if(Raymond.isTriggered(response)) {
-			chatting = false; //exits the while loop, IMPORTANT FOR GRADE
-			Raymond.talk(response);
-		}else {
-			ChatbotMain.print("I'm sorry. I don't understand. I never said i was perfect.");
-		}
-	}
-	while(chatting) {
-		ChatbotMain.print("What would you like to talk about?");
-		String response = ChatbotMain.getInput();
-		if(David.isTriggered(response)) {
-			chatting = false; //exits the while loop, IMPORTANT FOR GRADE
-			David.talk(response);
-		}else {
-			ChatbotMain.print("I'm sorry. I don't understand. I never said i was perfect.");
-		}
-	}
-	while(chatting) {
-		ChatbotMain.print("What would you like to talk about?");
-		String response = ChatbotMain.getInput();
-		if(Vincent.isTriggered(response)) {
-			chatting = false; //exits the while loop, IMPORTANT FOR GRADE
-			Vincent.talk(response);
-		}else {
-			ChatbotMain.print("I'm sorry. I don't understand. I never said i was perfect.");
-		}
-	}
-}
+		
 
+	}
+	
+	
 }
 
 
