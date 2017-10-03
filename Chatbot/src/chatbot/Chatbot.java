@@ -2,7 +2,7 @@ package chatbot;
 
 public class Chatbot {
 
-	private String username;
+	private static String username;
 	private boolean chatting;
 	private Topic Derek;
 	private Topic David;
@@ -18,7 +18,7 @@ public class Chatbot {
 		username = "Unknown User";
 		chatting = true;		
 	}  
-	public String getUsername() {
+	public static String getUsername() {
 		return username;
 	}
 	
