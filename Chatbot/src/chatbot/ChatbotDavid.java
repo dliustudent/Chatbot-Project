@@ -8,30 +8,43 @@ public class ChatbotDavid implements Topic {
 	private String secretKeyword;
 	private String response;
 	private String[] eaglesFacts;
+	private String[] reply;
+	
 	
 	public ChatbotDavid() {
-		String[] temp = {"Eagle","Penguin","Vulture","Hummingbird","bird"};
+		String[] temp = {"Eagles","Penguins","Vultures","Hummingbirds","bird"};
 		keywords = temp;
 		goodbyeKeyword = "bye";
 		secretKeyword = "feathers";
 		response = "";
 		
-		String[] facts = {"1","2","3"};
+		String[] facts = {"Most of the 60 species of eagles are from Eurasia and Africa. Outside this area, just 14 species can be found – two in North America, nine in Central and South America, and three in Australia.","Eagles normally build their nests, called eyries, in tall trees or on high cliffs. Many species lay two eggs, but the older, larger chick frequently kills its younger sibling once it has hatched.","Like all birds of prey, eagles have very large, hooked beaks for ripping flesh from their prey, strong, muscular legs, and powerful talons.","The Bald eagle can fly to a speed of 75 – 99 mph."};
 		eaglesFacts = facts;
+		String answer[] = {"yes","no"};
+		reply = answer;
+		
 		
 	}
 	
 	@Override
 	public void talk(String response) {
 		
-		 int x = (int) (Math.random()*3)+1;
+		int rageCounter = 0;
 		
-		ChatbotMain.print("Hey! So you want to talk about birds, right? What do you want to know about birds.");
+		ChatbotMain.print("Hey!"+ " "+ ChatbotMain.chatbot.getUsername()+" "+ "So you want to talk about birds, right? What kinds of birds do you want to talk about.");
 		response = ChatbotMain.getInput();
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0) == -1) {
+			
+			int x = (int) (Math.random()*3)+0;
+			
+			
+			
 			if(ChatbotMain.findKeyword(response, keywords[0], 0) >=0 ) {
-				ChatbotMain.print(eaglesFacts[x]);
-				response = ChatbotMain.getInput();
+				ChatbotMain.print("Great eagles are my favorite types of birds. Did you know that"+" "+ eaglesFacts[x] + " " + "So" + " " + ChatbotMain.chatbot.getUsername() + " " + "do you still want to talk about Eagles?" );
+				
+				
+				continueTalking();
+				
 			}
 			if(ChatbotMain.findKeyword(response, keywords[1], 0) >=0 ) {
 				ChatbotMain.print("Did you know that penguin are one of a few birds that cannot fly.");
@@ -51,16 +64,42 @@ public class ChatbotDavid implements Topic {
 			}
 			else
 			{
-				ChatbotMain.print("What others birds do you want to talk about?");
-				response = ChatbotMain.getInput();
+				if(rageCounter<3)
+				{
+					ChatbotMain.print(response + " is not a type of bird. Please enter a bird.");
+					rageCounter++;
+					response = ChatbotMain.getInput();
+				}
+				if(rageCounter>3&&rageCounter<5)
+				{
+					ChatbotMain.print("PLEASE ENTER A BIRD. BEFORE I GET REALLY MAD!!!");
+					rageCounter++;
+					response = ChatbotMain.getInput();
+				}
+				if(rageCounter>5)
+				{
+					
+				}
 			}
 			
 		}
 		//access variables from other classes.
-		ChatbotMain.print("Well, it was nice talking with you, "+ChatbotMain.chatbot.getUsername()+"!");
+		ChatbotMain.print("Well, it was nice talking with you, "+ChatbotMain.chatbot.getUsername()+" "+"I recommend going to the get some food now!");
 		ChatbotMain.chatbot.startChatting();
 	}
 
+	public void continueTalking() {
+		response = ChatbotMain.getInput();
+		if(response.equals(reply[0]))
+		{
+			int x = (int) (Math.random()*3)+1;
+			ChatbotMain.print(eaglesFacts[x] + "" + "Do you still want to talk about Eagles?" );
+		}
+		continueTalking();
+	}
+	
+	
+	
 	@Override
 	public boolean isTriggered(String response) {
 		for(int i=0; i < keywords.length; i++) {
