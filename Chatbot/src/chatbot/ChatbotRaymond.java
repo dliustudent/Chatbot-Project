@@ -131,7 +131,7 @@ public class ChatbotRaymond implements Topic {
 				ChatbotMain.print("Ok fine..");
 				madCount ++;
 			}
-		}
+		} 
 		response = ChatbotMain.getInput(); 
 		
 	}
