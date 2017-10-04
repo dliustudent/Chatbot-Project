@@ -18,7 +18,7 @@ public class ChatbotDavid implements Topic {
 		secretKeyword = "feathers";
 		response = "";
 		
-		String[] facts = {"Most of the 60 species of eagles are from Eurasia and Africa. Outside this area, just 14 species can be found – two in North America, nine in Central and South America, and three in Australia.","Eagles normally build their nests, called eyries, in tall trees or on high cliffs. Many species lay two eggs, but the older, larger chick frequently kills its younger sibling once it has hatched.","Like all birds of prey, eagles have very large, hooked beaks for ripping flesh from their prey, strong, muscular legs, and powerful talons.","The Bald eagle can fly to a speed of 75 – 99 mph."};
+		String[] facts = {"Most of the 60 species of eagles are from Eurasia and Africa. Outside this area, just 14 species can be found â€“ two in North America, nine in Central and South America, and three in Australia.","Eagles normally build their nests, called eyries, in tall trees or on high cliffs. Many species lay two eggs, but the older, larger chick frequently kills its younger sibling once it has hatched.","Like all birds of prey, eagles have very large, hooked beaks for ripping flesh from their prey, strong, muscular legs, and powerful talons.","The Bald eagle can fly to a speed of 75 â€“ 99 mph."};
 		eaglesFacts = facts;
 		String answer[] = {"yes","no"};
 		reply = answer;
@@ -87,7 +87,7 @@ public class ChatbotDavid implements Topic {
 		ChatbotMain.print("Well, it was nice talking with you, "+ChatbotMain.chatbot.getUsername()+" "+"I recommend going to the get some food now!");
 		ChatbotMain.chatbot.startChatting();
 	}
-
+	//booty
 	public void continueTalking() {
 		response = ChatbotMain.getInput();
 		if(response.equals(reply[0]))
