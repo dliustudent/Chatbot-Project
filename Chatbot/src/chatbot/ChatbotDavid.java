@@ -88,7 +88,7 @@ public class ChatbotDavid implements Topic {
 			}
 				
 			i++;	
-		}	
+		}	//ggg
 		else
 		{
 			talk(response);
