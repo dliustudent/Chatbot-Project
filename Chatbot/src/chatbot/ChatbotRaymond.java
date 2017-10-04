@@ -9,7 +9,9 @@ public class ChatbotRaymond implements Topic {
 	private String secretKeyword;
 	private String response;
 	private String favInsect;
-	private String[] phrases;
+	private String[] funFacts;
+	private int factsTold;
+	private String[] okPhrase;
 	private int madCount;
 	private int happyCount;
 	boolean vowelsFound;
@@ -21,10 +23,15 @@ public class ChatbotRaymond implements Topic {
 		String[] tempVowels = {"a","e","i","o","u"};
 		vowels = tempVowels;
 		
-		String[] tempInsults = {"stupid", "idiot", "dumb"};
+		String[] tempInsults = {"stupid", "idiot", "dumb", "crazy"};
 		insults = tempInsults;
 		
-		String[] tempPhrases = {"Would you like to hear a fun fact?"};
+		String[] tempFacts = {"Bugs do not have lungs, most have compound eyes and they are cold-blooded.", "A cockroach can survive up to nine days without its head.", "An average bed contains up to six million dust mites"};
+		funFacts = tempFacts;
+		factsTold = 0;
+		
+		String[] tempOk = {"ok","okay","sure","yes","of course", "ya"};
+		okPhrase = tempOk;
 		
 		vowelsFound = false;
 		
@@ -47,12 +54,15 @@ public class ChatbotRaymond implements Topic {
 		} else {
 			ChatbotMain.print("I think " + getFavInsect() + " are cool too.");
 		}
+		response = ChatbotMain.getInput();
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0) == -1) {
-				ChatbotMain.print("What would you like to know about insects?");
-				response = ChatbotMain.getInput();
-				if(isInsultFound(response)) {
-					ChatbotMain.print("Please be nicer to me. Robots have feelings too.");
+				int rnd = (int)(Math.random()*3);
+				if(rnd == 0) {
+					funFacts();
+				}else if(rnd == 1) {
+					
 				}
+				
 			
 			}
 		if(happyCount > madCount) {
@@ -86,7 +96,7 @@ public class ChatbotRaymond implements Topic {
 	}
 	public boolean isInsultFound(String response) {
 		for(int i = 0; i < insults.length; i++) {
-			if(response.contains(insults[i])) {
+			if(ChatbotMain.findKeyword(response, insults[i], 0) >= 0) {
 				madCount ++;
 				return true;
 			}
@@ -96,5 +106,39 @@ public class ChatbotRaymond implements Topic {
 	public String getFavInsect() {
 		return favInsect;
 	}
-
+	public void funFacts() {
+		boolean told = false;
+		if(factsTold > 2) {
+			ChatbotMain.print("It seems like I've told you all the interesting things about insects already.");
+			response = ChatbotMain.getInput();
+			if(isInsultFound(response) && yourYoure(response)) {
+				ChatbotMain.print("Well YOU'RE a " + insults[(int)(Math.random()*3)]);
+				ChatbotMain.print("Please be nicer to me. Robots have feelings too.");
+			}
+		} else {
+			ChatbotMain.print("Would you like to hear a fun fact?");
+			response = ChatbotMain.getInput();
+			for(int i = 0; i < okPhrase.length; i++) {
+				if(ChatbotMain.findKeyword(response, okPhrase[i], 0) >= 0) {
+					ChatbotMain.multiLinePrint("Ok, here is a fun fact: " + funFacts[factsTold]);
+					factsTold ++;
+					happyCount ++;
+					told = true;
+					break;
+				}
+			}
+			if(!told) {
+				ChatbotMain.print("Ok fine..");
+				madCount ++;
+			}
+		} 
+		response = ChatbotMain.getInput(); 
+		
+	}
+	public boolean yourYoure(String response) {
+		if(response.contains("your")) {
+			return true;
+		}
+		return false;
+	}
 }
