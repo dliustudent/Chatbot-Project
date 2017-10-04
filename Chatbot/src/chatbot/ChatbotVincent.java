@@ -110,7 +110,7 @@ public class ChatbotVincent implements Topic {
 		if (startedConversation == true) {
 			ChatbotMain.print("We just talked about " + lastTalk + ", which mammal do you want to talk about now!");
 		}
-	}
+	} 
 	public boolean isTriggered(String response) {
 		for(int i = 0; i < keywords.length ; i++ ){
 			if(ChatbotMain.findKeyword(response, keywords[i],0) >=0) {
