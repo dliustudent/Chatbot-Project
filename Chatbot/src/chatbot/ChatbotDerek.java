@@ -36,22 +36,19 @@ public class ChatbotDerek implements Topic {
 		
 		response = ChatbotMain.getInput();
 		
-		while(!response.equals(goodbyeKeyword)) {
-			if (ChatbotMain.findKeyword(response, secretKeyword, 0) >= 0) {
-				ChatbotMain.print("Wow! You know about the skink! You are pretty cool!.");
-			}
-			
-			if (ChatbotMain.findKeyword(response, keywords[0], 0) >= 0) {
-					ChatbotMain.print("I think" + keywords[0] + "is also a great reptile! What do you know about it?");
-					response = ChatbotMain.getInput();
-					countingWord(response);
-			}else {
-				ChatbotMain.print("Sorry I do not understand! Give me another reptile!");
+		 while(!response.equals(goodbyeKeyword)) {
+				for(int i = 0 ; i < keywords.length ; i++) {
+					if(ChatbotMain.findKeyword(response, secretKeyword, 0) >= 0) {
+						ChatbotMain.print("Wow! You know about skinks? You are amazing!");
+						response = ChatbotMain.getInput();
+					}else if (ChatbotMain.findKeyword(response, keywords[i], 0) >= 0) {
+						ChatbotMain.print("I can't even. I love "+ response +" so much.");
+						response = ChatbotMain.getInput();
+					}
+				}
+				ChatbotMain.print("I don't know what you are talking about");
 				response = ChatbotMain.getInput();
-			}
-		}	
-		ChatbotMain.print("Well, it was nice talking to you, "+Chatbot.getUsername()+"!");
-		ChatbotMain.chatbot.startChatting();
+		 }
 	}
 	
 	public void countingWord(String response) {
@@ -67,14 +64,15 @@ public class ChatbotDerek implements Topic {
 			ChatbotMain.print("I am serious. Stop saying" + a +"already you idiot!");
 		}
 	}
+	
 	public void upsetString() {
 		if(countRage > 1) {
-			ChatbotMain.print("You said snake already!");
+			ChatbotMain.print("You said" + response + "already!");
 		}
 	}
 		
 	public boolean sameWord(String userInput) {
-		if(ChatbotMain.findKeyword(userInput, "snake", 0)>= 0 ){
+		if(ChatbotMain.findKeyword(userInput, response, 0)>= 0 ){
 			return true;
 		}
 		return false;
