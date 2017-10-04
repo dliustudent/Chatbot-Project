@@ -132,7 +132,7 @@ public class ChatbotRaymond implements Topic {
 				madCount ++;
 			}
 		}
-		response = ChatbotMain.getInput();
+		response = ChatbotMain.getInput(); 
 		
 	}
 	public boolean yourYoure(String response) {
