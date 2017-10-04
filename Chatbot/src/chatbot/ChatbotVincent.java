@@ -49,7 +49,7 @@ public class ChatbotVincent implements Topic {
 		} 
 		//access variable from other classes
 		ChatbotMain.print("Well it was nice talking to you, "+ ChatbotMain.chatbot.getUsername()+"!");
-	}
+	} 
 	public void startTalking(String a){
 		int i = 0;
 		while(continueWhile == true) {
