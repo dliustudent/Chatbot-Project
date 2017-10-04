@@ -9,13 +9,13 @@ public class ChatbotDavid implements Topic {
 	private String response;
 	private String[] eaglesFacts;
 	private String[] reply;
-	
+	private String question;
 	
 	public ChatbotDavid() {
-		String[] temp = {"Eagles","Penguins","Vultures","Hummingbirds","bird"};
+		String[] temp = {"Eagle","Penguin","Vulture","Hummingbird","birds"};
 		keywords = temp;
 		goodbyeKeyword = "bye";
-		secretKeyword = "feathers";
+		secretKeyword = "bird";
 		response = "";
 		
 		String[] facts = {"Most of the 60 species of eagles are from Eurasia and Africa. Outside this area, just 14 species can be found – two in North America, nine in Central and South America, and three in Australia.","Eagles normally build their nests, called eyries, in tall trees or on high cliffs. Many species lay two eggs, but the older, larger chick frequently kills its younger sibling once it has hatched.","Like all birds of prey, eagles have very large, hooked beaks for ripping flesh from their prey, strong, muscular legs, and powerful talons.","The Bald eagle can fly to a speed of 75 – 99 mph."};
@@ -23,6 +23,7 @@ public class ChatbotDavid implements Topic {
 		String answer[] = {"yes","no"};
 		reply = answer;
 		
+		question = "";
 		
 	}
 	
@@ -35,36 +36,17 @@ public class ChatbotDavid implements Topic {
 		response = ChatbotMain.getInput();
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0) == -1) {
 			
-			int x = (int) (Math.random()*3)+0;
-			
-			
-			
 			if(ChatbotMain.findKeyword(response, keywords[0], 0) >=0 ) {
-				ChatbotMain.print("Great eagles are my favorite types of birds. Did you know that"+" "+ eaglesFacts[x] + " " + "So" + " " + ChatbotMain.chatbot.getUsername() + " " + "do you still want to talk about Eagles?" );
-				
+			
+			
+				ChatbotMain.print("Great eagles are my favorite types of birds. Did you know that"+" "+ eaglesFacts[0] + " " + "So" + " " + ChatbotMain.chatbot.getUsername() + " " + "do you still want to talk about Eagles?");
 				
 				continueTalking();
-				
-			}
-			if(ChatbotMain.findKeyword(response, keywords[1], 0) >=0 ) {
-				ChatbotMain.print("Did you know that penguin are one of a few birds that cannot fly.");
-				response = ChatbotMain.getInput();
-			}
-			if(ChatbotMain.findKeyword(response, keywords[2], 0) >=0 ) {
-				ChatbotMain.print("Did you know that vulture are scavenger?");
-				response = ChatbotMain.getInput();
-			}
-			if(ChatbotMain.findKeyword(response, keywords[3], 0) >=0 ) {
-				ChatbotMain.print("Did you know that a Hummingbird flaps its wings over 100 times per minutes?");
-				response = ChatbotMain.getInput();
-			}
-			if(ChatbotMain.findKeyword(response, secretKeyword, 0) >=0 ) {
-				ChatbotMain.print("Do you know why bird fly in a V shape?");
-				response = ChatbotMain.getInput();
+			
 			}
 			else
 			{
-				if(rageCounter<3)
+				if(rageCounter<2)
 				{
 					ChatbotMain.print(response + " is not a type of bird. Please enter a bird.");
 					rageCounter++;
@@ -78,8 +60,11 @@ public class ChatbotDavid implements Topic {
 				}
 				if(rageCounter>5)
 				{
-					
+					ChatbotMain.print("AHHHHHHHHHHHHHHHHH!!!");
+					rageCounter++;
+					response = ChatbotMain.getInput();
 				}
+				
 			}
 			
 		}
@@ -92,13 +77,43 @@ public class ChatbotDavid implements Topic {
 		response = ChatbotMain.getInput();
 		if(response.equals(reply[0]))
 		{
-			int x = (int) (Math.random()*3)+1;
-			ChatbotMain.print(eaglesFacts[x] + "" + "Do you still want to talk about Eagles?" );
+			int i=0;
+				
+			ChatbotMain.print("Did you know that"+" "+ eaglesFacts[i+1] + " " + "So" + " " + ChatbotMain.chatbot.getUsername() + " " + "do you still want to talk about Eagles?" );
+				
+			if(i>=eaglesFacts.length) 
+			{
+				ChatbotMain.print("Sorry I ran out of fact about birds. Do you know any fact about birds?");
+				question(response);
+			}
+				
+			i++;	
+		}	
+		else
+		{
+			talk(response);
+			
 		}
 		continueTalking();
 	}
 	
-	
+	public void question(String response)
+	{
+		int rageCounter = 0;
+		ChatbotMain.print("Wow you are so smart tell me more.");
+		if(response.equals(question))
+		{
+			if(rageCounter<2)
+			{	
+				ChatbotMain.print("You already told me this fact.");
+				rageCounter++;
+			}
+			else
+			{
+				ChatbotMain.print("STOP REPEATING THE SAME THING!!!");
+			}
+		}
+	}
 	
 	@Override
 	public boolean isTriggered(String response) {
