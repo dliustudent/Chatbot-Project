@@ -99,7 +99,7 @@ public class ChatbotVincent implements Topic {
 					}
 					
 				}
-				
+				 
 			}
 		}else {
 			ignoreStatement = false;
