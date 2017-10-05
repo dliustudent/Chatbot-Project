@@ -83,7 +83,7 @@ public class ChatbotMain {
 	
 		public static void multiLinePrint(String s){
 			String printString = "";
-			int cutoff = 25;
+			int cutoff = 50;
 			//this while loop last as long as there are words left in the original String
 			while(s.length() > 0){
 	
