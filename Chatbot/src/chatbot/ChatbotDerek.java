@@ -31,7 +31,7 @@ public class ChatbotDerek implements Topic {
 			if (ChatbotMain.findKeyword(response, keywords[i], 0) >= 0) {
 				return true;
 			}
-		}
+		} 
 		return false;   
 	}
  
