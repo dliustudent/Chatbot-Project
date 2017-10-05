@@ -52,7 +52,7 @@ public class ChatbotDavid implements Topic {
 				
 				continueTalking();
 				break;
-			
+			//hi
 			}
 			while(ChatbotMain.findKeyword(response, keywords[2], 0) >=0 ) {
 					

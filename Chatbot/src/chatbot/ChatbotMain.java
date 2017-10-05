@@ -86,7 +86,7 @@ public class ChatbotMain {
 			int cutoff = 50;
 			//this while loop last as long as there are words left in the original String
 			while(s.length() > 0){
-	
+				
 				String currentCut = "";
 				String nextWord = "";
 	
