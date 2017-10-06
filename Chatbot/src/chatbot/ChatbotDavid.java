@@ -169,7 +169,7 @@ public class ChatbotDavid implements Topic {
 		}
 	}
 	
-	
+	//gg
 	@Override
 	public boolean isTriggered(String response) {
 		for(int i=0; i < keywords.length; i++) {
