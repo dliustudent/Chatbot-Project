@@ -11,6 +11,7 @@ public class ChatbotDerek implements Topic {
 	private String regularResponse;
 	private String[] love;
 	private String[] hate;
+	private String[] loved;
 	
 	public ChatbotDerek() {
 		String[] temp = {"reptiles", "alligator", "crocodile", "lizard", "snake", "turtle", "tortoise",};
@@ -37,7 +38,7 @@ public class ChatbotDerek implements Topic {
  
 	public void talk(String response) {
 		String a = Chatbot.getUsername();	
-		ChatbotMain.print("Hi, "+ a + "!" + " Reptiles are a great species of animals! Tell me a species you would like to talk about.");
+		ChatbotMain.print("Hi, "+ a + "!" + " Reptiles are extremely cool! What reptile would you like to talk about?");
 		response = ChatbotMain.getInput();
 		 while(!response.equals(goodbyeKeyword)) {
 				for(int i = 0 ; i < keywords.length ; i++) {
@@ -71,30 +72,25 @@ public class ChatbotDerek implements Topic {
 						response = ChatbotMain.getInput();
 					}
 				} 
-				loveHate();
-				 ChatbotMain.print("I don't know what you are talking about");
+				
+				 ChatbotMain.print("Try typing alligator, crocodile, lizard, snake, turtle, or tortoise");
 				 response = ChatbotMain.getInput();}
 			}
 		 	
 
-	public void loveHate()
+	public void emotion()
 	{
 		String c = ChatbotMain.getInput();
 		for(int i = 0 ; i < love.length ; i++) {
 			if(ChatbotMain.findKeyword(c, love[i], 0) >= 0) {
 				ChatbotMain.print("I know right! That reptile is awesome!");
-			}else{
-				break;
-			}
-		for(int j = 0 ; j < love.length ; j++) {
+		for(int j = 0 ; j < hate.length ; j++) {
 			if(ChatbotMain.findKeyword(c, hate[i], 0) >= 0) {
 				ChatbotMain.print("Aww, thats too bad! I don't think that reptile sucks but ok.");
-				}else {
-					break;
+					}
 				}
 			}
 		}
 	}
 }
-
 
