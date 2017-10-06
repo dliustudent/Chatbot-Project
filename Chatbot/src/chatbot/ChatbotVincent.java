@@ -99,7 +99,7 @@ public class ChatbotVincent implements Topic {
 					}else {
 						ChatbotMain.print("I don't know what you're talking about. Please answer my question");
 						response = ChatbotMain.getInput();
-					}
+					} 
 					
 				}
 				 
