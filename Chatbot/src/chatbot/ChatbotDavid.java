@@ -39,11 +39,7 @@ public class ChatbotDavid implements Topic {
 		
 		checkIfBird(response);
 		
-		if(rageCounter>5)
-		{
-			ChatbotMain.print("Thank you finally entering a birds.");
-			
-		}
+
 		
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0) == -1) {
 			
@@ -161,7 +157,7 @@ public class ChatbotDavid implements Topic {
 					}
 					else
 					{
-						if(rageCounter>=6)
+						if(rageCounter>5)
 						{
 							ChatbotMain.print("I don't want to talk with you anymore.");
 							rageCounter++;
