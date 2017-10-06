@@ -14,7 +14,7 @@ public class ChatbotDerek implements Topic {
 	private String[] loved;
 	
 	public ChatbotDerek() {
-		String[] temp = {"reptiles", "alligator", "crocodile", "lizard", "snake", "turtle", "tortoise",};
+		String[] temp = {"reptile","reptiles", "alligator", "crocodile", "lizard", "snake", "turtle", "tortoise",};
 		keywords = temp;
 		goodbyeKeyword = "bye";
 		secretKeyword = "skink";

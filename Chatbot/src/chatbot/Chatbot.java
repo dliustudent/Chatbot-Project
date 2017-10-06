@@ -6,14 +6,14 @@ public class Chatbot {
 	private boolean chatting;
 	private Topic Derek;
 	private Topic David;
-	private Topic Raymondadmin;
+	private Topic Raymond;
 	private Topic Vincent;
 	
 	
 	public Chatbot() { 
 		Derek = new ChatbotDerek();
 		David = new ChatbotDavid();
-		Raymondadmin = new ChatbotRaymond();
+		Raymond = new ChatbotRaymond();
 		Vincent = new ChatbotVincent();
 		username = "Unknown User";
 		chatting = true;		
@@ -31,7 +31,7 @@ public class Chatbot {
 	}
 	
 	public Topic getRaymond() {
-		return Raymondadmin;
+		return Raymond;
 	}
 	
 	public Topic getVincent() {
@@ -56,9 +56,9 @@ public class Chatbot {
 				chatting = false;
 				Vincent.talk(response);
 			}
-			else if (Raymondadmin.isTriggered(response)) {
+			else if (Raymond.isTriggered(response)) {
 				chatting = false;
-				Raymondadmin.talk(response);
+				Raymond.talk(response);
 			}
 			else 
 			{
