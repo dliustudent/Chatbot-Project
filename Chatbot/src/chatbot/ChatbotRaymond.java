@@ -16,6 +16,7 @@ public class ChatbotRaymond implements Topic {
 	private String[] beforeInsult;
 	private String rndInsect;
 	private String[] listInsects;
+	private boolean conversation;
 	boolean vowelsFound;
 	
 	public ChatbotRaymond() {
@@ -42,6 +43,7 @@ public class ChatbotRaymond implements Topic {
 		okPhrase = tempOk;
 		
 		vowelsFound = false;
+		conversation = true;
 		
 		favInsect = "";
 		rndInsect = "";
@@ -65,13 +67,12 @@ public class ChatbotRaymond implements Topic {
 		}
 		response = ChatbotMain.getInput();
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0) == -1) {
+				longConversation();
 				int rnd = (int)(Math.random()*3);
 				if(rnd == 0) {
 					funFacts();
 				}else if(rnd == 1) {
 					thinkingGame();
-				}else if(rnd == 2) {
-					
 				}
 				
 			
@@ -173,5 +174,28 @@ public class ChatbotRaymond implements Topic {
 		}
 		
 		
+	}
+	public boolean longConversation() {
+		if(!conversation) {
+			return false;
+		}else {
+			ChatbotMain.print("So, lets talk about insects and we can play games later.");
+			response = ChatbotMain.getInput();
+			if(isInsultFound(response)) {
+				madComments();
+				response = ChatbotMain.getInput();
+			}
+		}
+		conversation = false;
+		return conversation;
+	}
+	public void madComments() {
+		if(madCount < 2) {
+			ChatbotMain.print("A bit mean aren't ya?");
+		} else if (madCount < 4) {
+			ChatbotMain.print("Now you are really pissing me off.");
+		} else if (madCount < 6) {
+			ChatbotMain.print("");
+		}
 	}
 }
