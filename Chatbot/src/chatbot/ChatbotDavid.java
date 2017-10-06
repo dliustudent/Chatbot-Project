@@ -31,11 +31,20 @@ public class ChatbotDavid implements Topic {
 	@Override
 	public void talk(String response) {
 		
+
 		
 		
 		ChatbotMain.print("Hey!"+ " "+ ChatbotMain.chatbot.getUsername()+" "+ "So you want to talk about birds, right? What kinds of birds do you want to talk about?");
 		response = ChatbotMain.getInput();
+		
 		checkIfBird(response);
+		
+		if(rageCounter>5)
+		{
+			ChatbotMain.print("Thank you finally entering a birds.");
+			
+		}
+		
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0) == -1) {
 			
 			while(ChatbotMain.findKeyword(response, keywords[0], 0) >=0 ) {
@@ -52,7 +61,7 @@ public class ChatbotDavid implements Topic {
 				
 				continueTalking();
 				break;
-			//hi
+			
 			}
 			while(ChatbotMain.findKeyword(response, keywords[2], 0) >=0 ) {
 					
@@ -70,6 +79,7 @@ public class ChatbotDavid implements Topic {
 				else
 				{
 					ChatbotMain.print("What?! You like vultures, well can you tell me why?");
+					response = ChatbotMain.getInput();
 				}
 			}
 			
@@ -131,27 +141,34 @@ public class ChatbotDavid implements Topic {
 	
 	public void checkIfBird(String response){
 		
-		
-		
-		if(ChatbotMain.findKeyword(response, keywords, 0) == -1)
+		for(int i=0; i<keywords.length; i++)
 		{
-			if(rageCounter<2)
+			if(ChatbotMain.findKeyword(response, keywords[i], 0) == -1)
 			{
-				ChatbotMain.print(response + " is not a type of bird. Please enter a bird.");
-				rageCounter++;
-				response = ChatbotMain.getInput();
-			}
-			if(rageCounter>3&&rageCounter<5)
-			{
-				ChatbotMain.print("PLEASE ENTER A BIRD. BEFORE I GET REALLY MAD!!!");
-				rageCounter++;
-				response = ChatbotMain.getInput();
-			}
-			if(rageCounter>5)
-			{
-				ChatbotMain.print("AHHHHHHHHHHHHHHHHH!!!");
-				rageCounter++;
-				response = ChatbotMain.getInput();
+				if(rageCounter<=2)
+				{
+					ChatbotMain.print(response + " is not a type of bird. Please enter a bird.");
+					rageCounter++;
+					response = ChatbotMain.getInput();
+				}
+				else
+				{
+					if(rageCounter>=3&&rageCounter<5)
+					{
+						ChatbotMain.print("PLEASE ENTER A BIRD. BEFORE I GET REALLY MAD!!!");
+						rageCounter++;
+						response = ChatbotMain.getInput();
+					}
+					else
+					{
+						if(rageCounter>=6)
+						{
+							ChatbotMain.print("I don't want to talk with you anymore.");
+							rageCounter++;
+							response = ChatbotMain.getInput();
+						}
+					}		
+				}
 			}
 		}
 	}
