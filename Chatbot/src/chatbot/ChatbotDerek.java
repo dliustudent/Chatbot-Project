@@ -88,7 +88,7 @@ public class ChatbotDerek implements Topic {
 			if(ChatbotMain.findKeyword(c, hate[i], 0) >= 0) {
 				ChatbotMain.print("Aww, thats too bad! I don't think that reptile sucks but ok.");
 					}
-				}
+				} 
 			}
 		}
 	}

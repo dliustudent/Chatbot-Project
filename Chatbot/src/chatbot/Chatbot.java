@@ -47,7 +47,7 @@ public class Chatbot {
 			if(Derek.isTriggered(response)) {
 				chatting = false; //exits the while loop, IMPORTANT FOR GRADE
 				Derek.talk(response);
-			}
+			} 
 			else if (David.isTriggered(response)) {
 				chatting = false;
 				David.talk(response);
