@@ -37,10 +37,10 @@ public class ChatbotVincent implements Topic {
 		David = new ChatbotDavid();
 		Raymond = new ChatbotRaymond();
 	
-		String[] temp = {"Mammal","Mammals"};
+		String[] temp = {"Mammal","Mammals","x","x","x","x","x"}; // didn't want to do try catch for for loop
 		keywords = temp;
 		
-		String[] real = {"Lion","Elephant","Panda","Dog","Cat","Wolf","Gorilla"};
+		String[] real = {"lion","elephant","panda","dog","cat","wolf","gorilla"};
 		actualKey = real;
 		
 		String[] hate = {"ugly","bad","big","rude","stupid","bad","vulgar","weak"};
@@ -74,9 +74,11 @@ public class ChatbotVincent implements Topic {
 				}else if (ChatbotMain.findKeyword(response, actualKey[i], 0) >= 0) {
 					continueWhile = true;
 					startTalking(actualKey[i]);
+					
 					if(ignoreStatement == true) {
 						returnTalk();
 					}
+					
 					response = ChatbotMain.getInput();
 					i = 0;
 				}
@@ -144,7 +146,6 @@ public class ChatbotVincent implements Topic {
 						ChatbotMain.print("I don't know what you're talking about. Please answer my question");
 						response = ChatbotMain.getInput();
 					} 
-					
 				}
 			}
 				else if (ChatbotMain.findKeyword(b, "Panda", 0) >= 0) {
@@ -252,7 +253,7 @@ public class ChatbotVincent implements Topic {
 	} 
 	
 	public boolean isTriggered(String response) {
-		for(int i = 0; i < keywords.length ; i++ ){
+		for(int i = 0; i < actualKey.length ; i++ ){
 			if(ChatbotMain.findKeyword(response, keywords[i],0) >=0) {
 				mammal = keywords[i];
 				skipMammal = false;
@@ -269,7 +270,6 @@ public class ChatbotVincent implements Topic {
 	
 	public void checkForOtherTypes(String s){ // checks for the other species
 		checkingOthers = true;
-		System.out.println(s);
 			if(Derek.isTriggered(s)) {
 				ChatbotMain.print("Do you want to talk about reptiles because "+s+" isn't a mammal");
 				response = ChatbotMain.getInput();

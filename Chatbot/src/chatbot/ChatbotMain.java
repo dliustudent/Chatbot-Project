@@ -39,6 +39,7 @@ public class ChatbotMain {
 		public static boolean keywordIsIsolated(int psn, String keyword, String s){
 			keyword = keyword.toLowerCase();
 			String wordAfter = "";
+			String wordBefore = "";
 			s = s.toLowerCase();
 			
 			try {
@@ -46,7 +47,12 @@ public class ChatbotMain {
 			}catch(Exception ex) {
 				wordAfter = "";
 			}
-			if(wordAfter.equals("") || wordAfter.compareTo("z") < -26 ) {
+			try {
+				wordBefore = s.substring(psn-1,psn);
+			}catch(Exception ex) {
+				wordBefore = "";
+			}
+			if((wordAfter.equals("") || wordAfter.compareTo("z") < -26) && (wordBefore.equals("") || wordBefore.compareTo("z") < -26)) {
 				return true;
 			}else {
 				return false;
