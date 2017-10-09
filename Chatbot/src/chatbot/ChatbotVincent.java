@@ -80,7 +80,7 @@ public class ChatbotVincent implements Topic {
 					}
 					
 					response = ChatbotMain.getInput();
-					i = 0;
+					i = -1;
 				}
 			}
 			if(gibberishMad < 3) {
