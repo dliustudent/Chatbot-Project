@@ -2,6 +2,10 @@ package chatbot;
 
 public class ChatbotVincent implements Topic {
 	
+	private Topic Derek;
+	private Topic David;
+	private Topic Raymond;
+	
 	private String[] keywords;
 	private String[] actualKey;
 	private String[] hateWords;
@@ -11,11 +15,11 @@ public class ChatbotVincent implements Topic {
 	private String name;
 	private String mammal;
 
-	private String likes;
-	private String dislikes;
+	private String likes; // couldn't do array so used a String that separate animals name with spaces
+	private String dislikes; //  Example: "Lion Elephant Panda ect"
 	private String lastTalk;
 	
-	private boolean skipMammal ;
+	private boolean skipMammal ; // Booleans for whiles and conditions to skip.
 	private boolean continueWhile;
 	private boolean startedConversation;
 	private boolean ignoreStatement;
@@ -28,10 +32,15 @@ public class ChatbotVincent implements Topic {
 	
 	
 	public ChatbotVincent() {
+		
+		Derek = new ChatbotDerek();
+		David = new ChatbotDavid();
+		Raymond = new ChatbotRaymond();
+	
 		String[] temp = {"Mammal","Mammals"};
 		keywords = temp;
 		
-		String[] real = {"Lion","Elephant","Panda","Dog	","Cat","Wolf","Gorilla"};
+		String[] real = {"Lion","Elephant","Panda","Dog","Cat","Wolf","Gorilla"};
 		actualKey = real;
 		
 		String[] hate = {"ugly","bad","big","rude","stupid","bad","vulgar","weak"};
@@ -57,6 +66,7 @@ public class ChatbotVincent implements Topic {
 			response = mammal;
 		}
 		while(!response.equals(goodbyeKeyword)) {
+			checkForOtherTypes(response);
 			for(int i = 0 ; i < actualKey.length ; i++) {
 				if(ChatbotMain.findKeyword(response, secretKeyword, 0) >= 0) {
 					ChatbotMain.print("RIP HARAMBE WE WILL NEVER FORGET YOU");
@@ -73,10 +83,20 @@ public class ChatbotVincent implements Topic {
 			}
 			if(gibberishMad < 3) {
 				gibberishMad += 1;
-				ChatbotMain.print("Yeah I don't know what your talking about. Let talks about a mammal :)");
+				String word = "";
+				for(int i = 0; i<actualKey.length; i++) {
+					if(handleCondition(actualKey[i])) {
+						if(i == actualKey.length - 1) {
+							word += "and "+actualKey[i]+"s ";
+						}else {
+							word += actualKey[i]+"s ";
+						}
+					}
+				}
+				ChatbotMain.print("Yeah I don't know what your talking about. Lets talk about "+ word);
 				response = ChatbotMain.getInput();
 			}else {
-				ChatbotMain.print("I don't understand what your saying :/. I'm not talking to you anymore"+ ChatbotMain.chatbot.getUsername()+"!");
+				ChatbotMain.print("I don't understand what your saying :/. I'm not talking to you anymore "+ ChatbotMain.chatbot.getUsername()+"!");
 				response = "bye";
 			}
 
@@ -87,10 +107,10 @@ public class ChatbotVincent implements Topic {
 		}
 		ChatbotMain.chatbot.returnChatting();
 	} 
-	public void startTalking(String s) { // handle the talking
-		String b = s.toLowerCase();
+	public void startTalking(String s) { // handle the talking. Redundant because it just copy and paste.
+		String b = s.toLowerCase();		//Limit the amount of animals you can talk about, to shorten code
 		while(continueWhile == true) {
-		if((!likes.contains(b) && dislikes.contains(b)) || (likes.contains(b) && dislikes.contains(b)) || (!likes.contains(b) && !dislikes.contains(b))) {
+		if(handleCondition(b)) {
 			ignoreStatement = true;
 			startedConversation = true;
 			if(!s.equals(lastTalk)) {
@@ -110,13 +130,12 @@ public class ChatbotVincent implements Topic {
 						response = ChatbotMain.getInput();
 					} 
 					
-				}
-				 
+				} 
 			}else if (ChatbotMain.findKeyword(b, "Elephant", 0) >= 0) {
 				lastTalk = "Elephant";
 				ChatbotMain.print("Elephants are the largest land animals in the world. Do you like them!");
 				response = ChatbotMain.getInput();
-				while(continueWhile == true) { // need this to make sure that it doesn't loop the entire conversation again
+				while(continueWhile == true) {
 					if(ChatbotMain.findKeyword(response, "Yes", 0)>= 0){
 						handleLike(b);
 					}else if(ChatbotMain.findKeyword(response, "No", 0)>= 0) {
@@ -132,7 +151,7 @@ public class ChatbotVincent implements Topic {
 					lastTalk = "Panda";
 					ChatbotMain.print("Panda are black and white bears. In the wild, they are found in thick bamboo forests, high up in the mountains of central China. Do you like them!");
 					response = ChatbotMain.getInput();
-					while(continueWhile == true) { // need this to make sure that it doesn't loop the entire conversation again
+					while(continueWhile == true) {
 						if(ChatbotMain.findKeyword(response, "Yes", 0)>= 0){
 							handleLike(b);
 						}else if(ChatbotMain.findKeyword(response, "No", 0)>= 0) {
@@ -146,8 +165,8 @@ public class ChatbotVincent implements Topic {
 			}else {
 				continueWhile = false;
 			}
-		}else {
-			ignoreStatement = false;
+		}else { // checks if you already talked about an animal
+			ignoreStatement = false; // ignore the returnTalk method.
 			if (likes.contains(b)) {
 				if (triggerMad < 2) {
 					ChatbotMain.print("I know that you like "+ b + " but lets talk about a different mammal now");
@@ -176,12 +195,20 @@ public class ChatbotVincent implements Topic {
 		return;
 		
 	}
+	public boolean handleCondition(String b){
+		return (!likes.contains(b) && dislikes.contains(b)) || (likes.contains(b) && dislikes.contains(b)) || (!likes.contains(b) && !dislikes.contains(b));
+	}
 	public void handleLike(String b) {
 		likes += b+" ";
 		ChatbotMain.print("Me too I love " + b +"!");
 		String[] splited = likes.split("\\s+"); // Splits the animals name locally
 		int randNumber = (int) (Math.floor(Math.random() * splited.length));
-		if(splited.length > 1) {
+		
+		if(splited[randNumber].equals(b)) { // check if it dupes
+			 randNumber = (int) (Math.floor(Math.random() * splited.length));
+		}
+		
+		if(splited.length > 1) { // just added an extra conversation that checks if you like an animal more than another animal
 			ChatbotMain.print("Do you like "+b+" more than "+splited[randNumber]);
 			response = ChatbotMain.getInput();
 			if(ChatbotMain.findKeyword(response, "Yes", 0)>= 0){
@@ -239,10 +266,48 @@ public class ChatbotVincent implements Topic {
 		return false;
 
 	}
-	public void checkForOtherAnimals(){
+	
+	public void checkForOtherTypes(String s){ // checks for the other species
 		checkingOthers = true;
-		while(checkingOthers) {
-			
+		System.out.println(s);
+			if(Derek.isTriggered(s)) {
+				ChatbotMain.print("Do you want to talk about reptiles because "+s+" isn't a mammal");
+				response = ChatbotMain.getInput();
+				if(ChatbotMain.findKeyword(response, "Yes", 0)>= 0){
+					checkingOthers = false;
+					Derek.talk(response);
+				}else if(ChatbotMain.findKeyword(response, "No", 0)>= 0) {
+					checkingOthers = false;
+				}else {
+					checkingOthers = false; // could do a while loop to ask them again if they type gibberish.
+				}
+			} 
+			else if (David.isTriggered(s)) {
+				ChatbotMain.print("Do you want to talk about birds because "+s+" isn't a mammal");
+				response = ChatbotMain.getInput();
+				if(ChatbotMain.findKeyword(response, "Yes", 0)>= 0){
+					checkingOthers = false;
+					David.talk(response);
+				}else if(ChatbotMain.findKeyword(response, "No", 0)>= 0) {
+					checkingOthers = false;
+				}else {
+					checkingOthers = false;
+				}
+			}
+			else if (Raymond.isTriggered(s)) {
+				ChatbotMain.print("Do you want to talk about insects because "+s+" isn't a mammal");
+				response = ChatbotMain.getInput();
+				if(ChatbotMain.findKeyword(response, "Yes", 0)>= 0){
+					checkingOthers = false;
+					Raymond.talk(response);
+				}else if(ChatbotMain.findKeyword(response, "No", 0)>= 0) {
+					checkingOthers = false;
+				}else {
+					checkingOthers = false;
+				}
+			}else {
+				checkingOthers = false;
+			}
 		}
-	}
+	
 }

@@ -46,7 +46,7 @@ public class ChatbotMain {
 			}catch(Exception ex) {
 				wordAfter = "";
 			}
-			if(wordAfter.equals("") || wordAfter.compareTo("z") < -26) {
+			if(wordAfter.equals("") || wordAfter.compareTo("z") < -26 ) {
 				return true;
 			}else {
 				return false;
