@@ -19,16 +19,19 @@ public class ChatbotVincent implements Topic {
 	private boolean continueWhile;
 	private boolean startedConversation;
 	private boolean ignoreStatement;
+	private boolean checkingOthers;
 	
-	private int triggerMad;
+	private int triggerMad; 
 	private String triggerAbout;
+	
+	private int gibberishMad; // created this because I didn't want triggerMad and gibberishMad to be the same thing.
 	
 	
 	public ChatbotVincent() {
 		String[] temp = {"Mammal","Mammals"};
 		keywords = temp;
 		
-		String[] real = {"Lion","Elephant"};
+		String[] real = {"Lion","Elephant","Panda","Dog	","Cat","Wolf","Gorilla"};
 		actualKey = real;
 		
 		String[] hate = {"ugly","bad","big","rude","stupid","bad","vulgar","weak"};
@@ -39,7 +42,7 @@ public class ChatbotVincent implements Topic {
 		likes = "";
 		dislikes = "";
 		goodbyeKeyword = "bye";
-		secretKeyword = "pug";
+		secretKeyword = "Harambe";
 		response = "";
 		
 		triggerMad = 0 ;
@@ -56,7 +59,7 @@ public class ChatbotVincent implements Topic {
 		while(!response.equals(goodbyeKeyword)) {
 			for(int i = 0 ; i < actualKey.length ; i++) {
 				if(ChatbotMain.findKeyword(response, secretKeyword, 0) >= 0) {
-					ChatbotMain.print("");
+					ChatbotMain.print("RIP HARAMBE WE WILL NEVER FORGET YOU");
 					response = ChatbotMain.getInput();
 				}else if (ChatbotMain.findKeyword(response, actualKey[i], 0) >= 0) {
 					continueWhile = true;
@@ -64,24 +67,30 @@ public class ChatbotVincent implements Topic {
 					if(ignoreStatement == true) {
 						returnTalk();
 					}
-					i = 0;
 					response = ChatbotMain.getInput();
+					i = 0;
 				}
 			}
-			ChatbotMain.print("Yeah I don't know what your talking about. Let talks about a mammal :);");
-			response = ChatbotMain.getInput();
-
+			if(gibberishMad < 3) {
+				gibberishMad += 1;
+				ChatbotMain.print("Yeah I don't know what your talking about. Let talks about a mammal :)");
+				response = ChatbotMain.getInput();
+			}else {
+				ChatbotMain.print("I don't understand what your saying :/. I'm not talking to you anymore"+ ChatbotMain.chatbot.getUsername()+"!");
+				response = "bye";
+			}
 
 		} 
 		//access variable from other classes
-		ChatbotMain.print("Well it was nice talking to you, "+ ChatbotMain.chatbot.getUsername()+"!");
+		if(gibberishMad < 3) {
+			ChatbotMain.print("Well it was nice talking to you, "+ ChatbotMain.chatbot.getUsername()+"!");
+		}
+		ChatbotMain.chatbot.returnChatting();
 	} 
-	public void startTalking(String s) {
+	public void startTalking(String s) { // handle the talking
 		String b = s.toLowerCase();
 		while(continueWhile == true) {
 		if((!likes.contains(b) && dislikes.contains(b)) || (likes.contains(b) && dislikes.contains(b)) || (!likes.contains(b) && !dislikes.contains(b))) {
-			System.out.println(likes);
-			System.out.println(dislikes);
 			ignoreStatement = true;
 			startedConversation = true;
 			if(!s.equals(lastTalk)) {
@@ -104,30 +113,59 @@ public class ChatbotVincent implements Topic {
 				}
 				 
 			}else if (ChatbotMain.findKeyword(b, "Elephant", 0) >= 0) {
-				
+				lastTalk = "Elephant";
+				ChatbotMain.print("Elephants are the largest land animals in the world. Do you like them!");
+				response = ChatbotMain.getInput();
+				while(continueWhile == true) { // need this to make sure that it doesn't loop the entire conversation again
+					if(ChatbotMain.findKeyword(response, "Yes", 0)>= 0){
+						handleLike(b);
+					}else if(ChatbotMain.findKeyword(response, "No", 0)>= 0) {
+						handleDislikes(b);
+					}else {
+						ChatbotMain.print("I don't know what you're talking about. Please answer my question");
+						response = ChatbotMain.getInput();
+					} 
+					
+				}
+			}
+				else if (ChatbotMain.findKeyword(b, "Panda", 0) >= 0) {
+					lastTalk = "Panda";
+					ChatbotMain.print("Panda are black and white bears. In the wild, they are found in thick bamboo forests, high up in the mountains of central China. Do you like them!");
+					response = ChatbotMain.getInput();
+					while(continueWhile == true) { // need this to make sure that it doesn't loop the entire conversation again
+						if(ChatbotMain.findKeyword(response, "Yes", 0)>= 0){
+							handleLike(b);
+						}else if(ChatbotMain.findKeyword(response, "No", 0)>= 0) {
+							handleDislikes(b);
+						}else {
+							ChatbotMain.print("I don't know what you're talking about. Please answer my question");
+							response = ChatbotMain.getInput();
+						} 
+						
+					}
 			}else {
 				continueWhile = false;
 			}
 		}else {
 			ignoreStatement = false;
 			if (likes.contains(b)) {
-				if (triggerMad < 4) {
+				if (triggerMad < 2) {
 					ChatbotMain.print("I know that you like "+ b + " but lets talk about a different mammal now");
 					continueWhile = false;
 					triggerMad += 1;
 					triggerAbout = b;
 				}else {
-					ChatbotMain.print("I know that you hate "+ b +" BUT LETS TALK ABOUT A DIFFERENT ANIMAL ALREADY NOT " + b + " PLEASE.");
+					ChatbotMain.print("I know that you hate "+ b +" BUT LETS TALK ABOUT A DIFFERENT ANIMAL ALREADY, NOT " + b + " PLEASE.");
 					continueWhile = false;
 				}
 			}else if (dislikes.contains(b)) {
-				if (triggerMad < 4) {
+				if (triggerMad < 2) {
 					ChatbotMain.print("I know that you hate "+ b +" but lets talk about a different mammal now");
 					continueWhile = false;
 					triggerMad += 1;
 					triggerAbout = b;
 				}else {
-					ChatbotMain.print("I know that you hate "+ b +" BUT LETS TALK ABOUT A DIFFERENT ANIMAL ALREADY NOT " + b + " PLEASE.");
+					ChatbotMain.print("I know that you hate "+ b +" BUT LETS TALK ABOUT A DIFFERENT ANIMAL ALREADY, NOT " + b + " PLEASE.");
 					continueWhile = false;
 				}
 				
@@ -141,8 +179,21 @@ public class ChatbotVincent implements Topic {
 	public void handleLike(String b) {
 		likes += b+" ";
 		ChatbotMain.print("Me too I love " + b +"!");
+		String[] splited = likes.split("\\s+"); // Splits the animals name locally
+		int randNumber = (int) (Math.floor(Math.random() * splited.length));
+		if(splited.length > 1) {
+			ChatbotMain.print("Do you like "+b+" more than "+splited[randNumber]);
+			response = ChatbotMain.getInput();
+			if(ChatbotMain.findKeyword(response, "Yes", 0)>= 0){
+				ChatbotMain.print("Yeah I agree with you "+ b +" are cooler than "+ splited[randNumber]);
+			}else if(ChatbotMain.findKeyword(response, "No", 0)>= 0) {
+				ChatbotMain.print("Yeah I agree with you "+ splited[randNumber] +" are cooler than "+ b);
+			}else {
+				ChatbotMain.print("Very interesting answer");
+			}
+			
+		}
 		continueWhile = false; // Ends Conversation of liking lions
-		return;
 	}
 	public void handleDislikes(String b){
 		ChatbotMain.print("What why do you hate them?");
@@ -155,10 +206,9 @@ public class ChatbotVincent implements Topic {
 			ChatbotMain.print("It doesn't matter they are still cool");
 		}
 		continueWhile = false; // Ends conversation of disliking lions
-		return;
 	}
 	
-	public String checkForBadWord(String response){
+	public String checkForBadWord(String response){ 
 		for(int i = 0 ; i < hateWords.length; i ++) {
 			if(ChatbotMain.findKeyword(response, hateWords[i],0) >=0) {
 				String a = hateWords[i];
@@ -188,5 +238,11 @@ public class ChatbotVincent implements Topic {
 		}
 		return false;
 
+	}
+	public void checkForOtherAnimals(){
+		checkingOthers = true;
+		while(checkingOthers) {
+			
+		}
 	}
 }

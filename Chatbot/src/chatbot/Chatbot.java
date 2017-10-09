@@ -70,6 +70,34 @@ public class Chatbot {
 		
 
 	}
+	public void returnChatting() {
+		chatting = true;
+		while(chatting) {
+			ChatbotMain.print("Welcome back what types of animals do you want to talk about now!");
+			String response = ChatbotMain.getInput();
+			if(Derek.isTriggered(response)) {
+				chatting = false; //exits the while loop, IMPORTANT FOR GRADE
+				Derek.talk(response);
+			} 
+			else if (David.isTriggered(response)) {
+				chatting = false;
+				David.talk(response);
+			}
+			else if (Vincent.isTriggered(response)) {
+				chatting = false;
+				Vincent.talk(response);
+			}
+			else if (Raymond.isTriggered(response)) {
+				chatting = false;
+				Raymond.talk(response);
+			}
+			else 
+			{
+			ChatbotMain.print("Try typing birds, reptiles, mammals or insects instead.");
+			}
+			
+		}
+	}
 	
 	
 }
