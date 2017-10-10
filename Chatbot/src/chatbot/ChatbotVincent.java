@@ -36,10 +36,6 @@ public class ChatbotVincent implements Topic {
 	
 	
 	public ChatbotVincent() {
-		
-		Derek = new ChatbotDerek();
-		David = new ChatbotDavid();
-		Raymond = new ChatbotRaymond();
 	
 		String[] temp = {"Mammal","Mammals","x","x","x","x","x"}; // didn't want to do try catch for for loop
 		keywords = temp;
@@ -64,7 +60,10 @@ public class ChatbotVincent implements Topic {
 		finishedCounter = 0;
 	}											
 	
-	public void talk(String response) {
+	public void talk(String response) {	
+		Derek = ChatbotMain.chatbot.getDerek();
+		David = ChatbotMain.chatbot.getDavid();
+		Raymond = ChatbotMain.chatbot.getRaymond();
 		name = ChatbotMain.chatbot.getUsername();
 		if (skipMammal == false) {
 			ChatbotMain.print("Hello " +name+ " what Mammals do you want to talk about?");
