@@ -1,11 +1,6 @@
 package chatbot;
 
 public class ChatbotDavid implements Topic {
-
-	private Topic Vincent;
-	private Topic Derek;
-	private Topic Raymond;
-	private boolean checkingOthers;
 	
 	private String[] keywords;
 	private String goodbyeKeyword;
@@ -19,7 +14,11 @@ public class ChatbotDavid implements Topic {
 	private String dislikes;
 	private String reasons;
 	int rageCounter = 0;
-	
+	private String[] penguin;
+	private String[] vulture;
+	private String[] hummingbird;
+	boolean checkbird;
+	boolean firstTalk;
 	
 	public ChatbotDavid() {
 		String[] temp = {"eagle","penguin","vulture","hummingbird","birds","bird"};
@@ -28,68 +27,76 @@ public class ChatbotDavid implements Topic {
 		secretKeyword = "bird";
 		response = "";
 		
-		String[] facts = {"Most of the 60 species of eagles are from Eurasia and Africa. Outside this area, just 14 species can be found two in North America, nine in Central and South America, and three in Australia.","Eagles normally build their nests, called eyries, in tall trees or on high cliffs. Many species lay two eggs, but the older, larger chick frequently kills its younger sibling once it has hatched.","Like all birds of prey, eagles have very large, hooked beaks for ripping flesh from their prey, strong, muscular legs, and powerful talons.","The Bald eagle can fly to a speed of 75 to 99 mph."};
-		String[] facts = {};
-		String[] facts = {};
-		String[] facts = {};
+		String[] facts1 = {"Most of the 60 species of eagles are from Eurasia and Africa. Outside this area, just 14 species can be found two in North America, nine in Central and South America, and three in Australia.","Eagles normally build their nests, called eyries, in tall trees or on high cliffs. Many species lay two eggs, but the older, larger chick frequently kills its younger sibling once it has hatched.","Like all birds of prey, eagles have very large, hooked beaks for ripping flesh from their prey, strong, muscular legs, and powerful talons.","The Bald eagle can fly to a speed of 75 to 99 mph."};
+		String[] facts2 = {"Emperor Penguins are the tallest species, standing nearly 4 feet tall.","3. The fastest species is the Gentoo Penguin, which can reach swimming speeds up to 22 mph.","All but two species of penguins breed in large colonies of up to a thousand birds."}; 
+		String[] facts3 = {"Vultures are found on every continent except Australia and Antarctica.", "Vultures only lay one egg every year or so.", "A vulture can eat up to 1 kilogram (about 2 pounds) in a single meal (that's over 10% of their body weight)."};
+		String[] facts4 = {"Hummingbirds are the only birds that can fly backwards.", "Some hummingbirds fly at speeds greater than 33 miles per hour.", "A hummingbird's wing beats take up so much energy, they spend the majority of their time resting on branches and twigs."};
 		
-		
-		eaglesFacts = facts;
+		penguin = facts2;
+		vulture = facts3;
+		hummingbird = facts4;
+		eaglesFacts = facts1;
 		String answer[] = {"yes","no","creepy","maybe"};
 		reply = answer;
 		likes = "";
 		dislikes = "";
 		reasons = "";
 		userFacts = "";
+		checkbird = false;
+		firstTalk = false;
+		
 	}
 	
 	@Override
 	public void talk(String response) {
 		
-		ChatbotMain.print("Hey!"+ " "+ ChatbotMain.chatbot.getUsername()+" "+ "So you want to talk about birds, right? What kinds of birds do you want to talk about?");
-		response = ChatbotMain.getInput();
-		
-		checkIfBird(response);
-		
-		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0) == -1) {
-			
-			while(ChatbotMain.findKeyword(response, keywords[0], 0) >=0 ) {
-			
-				ChatbotMain.print("Great eagles are my favorite types of birds. Did you know that"+" "+ eaglesFacts[0] + " " + "So" + " " + ChatbotMain.chatbot.getUsername() + " " + "do you still want to talk about Eagles?");
+		if(firstTalk == false)
+		{
+			ChatbotMain.print("Hey!"+ " "+ ChatbotMain.chatbot.getUsername()+" "+ "So you want to talk about birds, right? What kinds of birds do you want to talk about?");
+			response = ChatbotMain.getInput();
+		}
+
+		if(checkbird==false)
+		{
+			firstTalk = true;
+			checkIfBird(response);
+		}
+		if(checkbird==true)
+		{	
+			while(!response.equals(goodbyeKeyword)) {
 				
-				continueTalking();
-			
-				break;
-			}
-			while(ChatbotMain.findKeyword(response, keywords[1], 0) >=0 ) {
+				while(response.equals(keywords[0])) {
 				
-				ChatbotMain.print("Great eagles are my favorite types of birds. Did you know that"+" "+ eaglesFacts[0] + " " + "So" + " " + ChatbotMain.chatbot.getUsername() + " " + "do you still want to talk about Eagles?");
-				continueTalking();
-				break;
-			
-			}
-			while(ChatbotMain.findKeyword(response, keywords[2], 0) >=0 ) {
-				//likes and dislikes	
-				ChatbotMain.print("Do you like Vulture?");
-				response = ChatbotMain.getInput();
-				likes = response;
-				if(likes.equals(reply[1]))
-				{
-					ChatbotMain.print("Me too, I find them a little bit creepy.");
+					ChatbotMain.print("Great eagles are my favorite types of birds. Did you know that"+" "+ eaglesFacts[0] + " " + "So" + " " + ChatbotMain.chatbot.getUsername() + " " + "do you still want to talk about Eagles?");
+					continueTalking();
 					break;
 				}
-				else
-				{
-					ChatbotMain.print("What?! You like vultures, well can you tell me why?");
+				
+				while(ChatbotMain.findKeyword(response, keywords[2], 0) >=0 ) {
+					//likes and dislikes	
+					ChatbotMain.print("Do you like Vulture?");
 					response = ChatbotMain.getInput();
-					reasons = response;
-					ChatbotMain.print("I see you like Vultures because"+" "+reasons+".");
+					likes = response;
+					if(likes.equals(reply[1]))
+					{
+						ChatbotMain.print("Me too, I find them a little bit creepy.");
+						break;
+					}
+					else
+					{
+						ChatbotMain.print("What?! You like vultures, well can you tell me why?");
+						response = ChatbotMain.getInput();
+						reasons = response;
+						ChatbotMain.print("I see you like Vultures because"+" "+reasons+".");
+					}
 				}
+
+				
 			}
-		}
-		//access variables from other classes.
-		ChatbotMain.print("Well, it was nice talking with you, "+ChatbotMain.chatbot.getUsername()+" "+"I recommend going to the get some food now!");
-		ChatbotMain.chatbot.startChatting();
+			//access variables from other classes.
+			ChatbotMain.print("Well, it was nice talking with you, "+ChatbotMain.chatbot.getUsername()+" "+"I recommend going to the get some food now!");
+			ChatbotMain.chatbot.startChatting();
+		}	
 	}
 	
 	public void continueTalking() {
@@ -155,6 +162,7 @@ public class ChatbotDavid implements Topic {
 			if(keywords[i].equals(response))
 			{
 				check++;
+				
 			}
 		}
 			if(check==0)
@@ -189,50 +197,10 @@ public class ChatbotDavid implements Topic {
 			}
 			if(check>0) 
 			{
+				checkbird = true;
 				talk(response);
 			}
 	}
-	 public void checkForOtherTypes(String s){ // checks for the other species
-	        checkingOthers = true;
-	            if(Derek.isTriggered(s)) {
-	                ChatbotMain.print("Do you want to talk about reptiles because "+s+" isn't a birds");
-	                response = ChatbotMain.getInput();
-	                if(ChatbotMain.findKeyword(response, "Yes", 0)>= 0){
-	                    checkingOthers = false;
-	                    Derek.talk(response);
-	                }else if(ChatbotMain.findKeyword(response, "No", 0)>= 0) {
-	                    checkingOthers = false;
-	                }else {
-	                    checkingOthers = false; // could do a while loop to ask them again if they type gibberish.
-	                }
-	            } 
-	            else if (Vincent.isTriggered(s)) {
-	                ChatbotMain.print("Do you want to talk about mammals because "+s+" isn't a birds");
-	                response = ChatbotMain.getInput();
-	                if(ChatbotMain.findKeyword(response, "Yes", 0)>= 0){
-	                    checkingOthers = false;
-	                    Vincent.talk(response);
-	                }else if(ChatbotMain.findKeyword(response, "No", 0)>= 0) {
-	                    checkingOthers = false;
-	                }else {
-	                    checkingOthers = false;
-	                }
-	            }
-	            else if (Raymond.isTriggered(s)) {
-	                ChatbotMain.print("Do you want to talk about insects because "+s+" isn't a birds");
-	                response = ChatbotMain.getInput();
-	                if(ChatbotMain.findKeyword(response, "Yes", 0)>= 0){
-	                    checkingOthers = false;
-	                    Raymond.talk(response);
-	                }else if(ChatbotMain.findKeyword(response, "No", 0)>= 0) {
-	                    checkingOthers = false;
-	                }else {
-	                    checkingOthers = false;
-	                }
-	            }else {
-	                checkingOthers = false;
-	            }
-	        }
 	 
 	@Override
 	public boolean isTriggered(String response) {
