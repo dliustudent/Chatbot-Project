@@ -24,6 +24,10 @@ public class ChatbotRaymond implements Topic {
 	private Topic Vincent;
 	
 	public ChatbotRaymond() {
+		
+		Derek = new ChatbotDerek();
+		David = new ChatbotDavid();
+		
 		String[] temp = {"insects","bugs","flys","ant","butterfly","bee","mosquito", "insect"};
 		keywords = temp;
 		
