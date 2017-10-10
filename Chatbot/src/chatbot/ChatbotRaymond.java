@@ -25,8 +25,7 @@ public class ChatbotRaymond implements Topic {
 	
 	public ChatbotRaymond() {
 		
-		Derek = new ChatbotDerek();
-		David = new ChatbotDavid();
+
 		
 		String[] temp = {"insects","bugs","flys","ant","butterfly","bee","mosquito", "insect"};
 		keywords = temp;
@@ -66,6 +65,9 @@ public class ChatbotRaymond implements Topic {
  
 	@Override
 	public void talk(String response) {
+		Derek = new ChatbotDerek();
+		David = new ChatbotDavid();
+		Vincent = new ChatbotVincent();
 		ChatbotMain.print("I love talking about insects. What is your favorite insect?");
 		response = ChatbotMain.getInput();
 		favInsect = response;
@@ -76,13 +78,13 @@ public class ChatbotRaymond implements Topic {
 		}
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0) == -1) {
 				longConversation();
-//				int rnd = (int)(Math.random()*3);
-//				if(rnd == 0) {
-//					funFacts();
-//				}else if(rnd == 1) {
-//					thinkingGame();
-//				}
-				if(factsTold == 0 && gamesPlayed == 0) { //SET TO 0 FOR TESTING RIGHT NOW
+				int rnd = (int)(Math.random()*3);
+				if(rnd == 0) {
+					funFacts();
+				}else if(rnd == 1) {
+					thinkingGame();
+				}
+				if(factsTold == 3 && gamesPlayed == 2) { 
 					ChatbotMain.multiLinePrint("I think we've had a good talk " + ChatbotMain.chatbot.getUsername() +" Is there any animal that is not an insect that you would like to talk about now?"); //redirect to other members
 					response = ChatbotMain.getInput();
 					if(isInsultFound(response) || ChatbotMain.findKeyword(response, "no", 0) >= 0) {
@@ -273,7 +275,7 @@ public class ChatbotRaymond implements Topic {
 						ChatbotMain.print("Wrong, the answer was south");
 					}
 				} else {
-					ChatbotMain.multiLinePrint("Sorry, my specialty is in bees and butterflies. Type your choice again");
+					ChatbotMain.multiLinePrint("Sorry, I'm more interested in discussing bees and butterflies. Type your choice again");
 					response = ChatbotMain.getInput();
 				}
 				
