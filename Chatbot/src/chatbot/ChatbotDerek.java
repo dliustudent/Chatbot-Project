@@ -86,7 +86,7 @@ public class ChatbotDerek implements Topic {
 			response = ChatbotMain.getInput();
 		}
 		if (f>1) {
-			ChatbotMain.print("Im for real stop!");
+			ChatbotMain.print("Im for real stop!"); 
 			response = ChatbotMain.getInput();
 		}
 		
