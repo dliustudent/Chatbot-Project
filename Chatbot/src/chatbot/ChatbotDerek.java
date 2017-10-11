@@ -17,16 +17,12 @@ public class ChatbotDerek implements Topic {
 	private String[] hate;
 	private boolean checkingOthers;
 	private boolean setFbackto0;
-	private boolean inLikeLoop;
 	private String response2;
-	private String thingsLiked;
-	private boolean userLikeStored;
+	private String thingLiked;
 	
 	
 	public ChatbotDerek() {
 
-		David = new ChatbotDavid();
-		Raymond = new ChatbotRaymond();
 		
 		String[] temp = {"reptile","reptiles", "alligator", "crocodile", "lizard", "snake", "turtle", "tortoise",};
 		keywords = temp;
@@ -38,8 +34,8 @@ public class ChatbotDerek implements Topic {
 		love = b;
 		String[] d = {"hate", "dislike", "no"};
 		hate = d;
-	//	String[] fac = {"same"};
-		//fact = fac;
+	//String[] fac = {"same"};
+	//	fact = fac;
 	}
 	
 	public boolean isTriggered(String response) {
@@ -52,6 +48,7 @@ public class ChatbotDerek implements Topic {
 		return false;   
 	}
  
+
 	public void talk(String response) {
 		
 		String a = Chatbot.getUsername();	
@@ -116,33 +113,25 @@ public class ChatbotDerek implements Topic {
 	}
 	
 	public void talk2(String response) {
-		regularResponse = response + " is/are very interesting. Do you like " + response + "(please type i like *blank*)";
+		thingLiked = response;
+		regularResponse = response + " is/are very interesting. Do you like " + response;
 		ChatbotMain.print(regularResponse);
 		emotion();
 	}
 	
-	public void emotion()
-	{
+	public void emotion(){
 		response2 = ChatbotMain.getInput();
-		int likePsn = ChatbotMain.findKeyword(response2, "like", 0);
-		if( likePsn >= 0 ){
-			thingsLiked = response2.substring(likePsn+5);
-			userLikeStored = true;
-			ChatbotMain.print("You are such an "+ "interesting"+ " person, because you like "+thingsLiked+".");
+		for(int i = 0 ; i < response2.length() ; i++) {
+		if(ChatbotMain.findKeyword(response2, love[i], 0) >= 0) {
+				ChatbotMain.print(("Wow! I like " +thingLiked+ " too! Do you want to hear a fact about " +thingLiked+ "?"));
+			}
 		}
-		else {
-			ChatbotMain.print("wat");
+		for(int j = 0 ; j < response2.length() ; j++) {
+			if(ChatbotMain.findKeyword(response2, hate[j], 0) >= 0) {
+				ChatbotMain.print("Aww, thats too bad! I don't think that reptile sucks but ok.");
+			}
+	}
 		}
-//		for(int i = 0 ; i < a.length() ; i++) {
-//			if(ChatbotMain.findKeyword(a, love[i], 0) >= 0) {
-//				ChatbotMain.print("Wow! I like that reptile too!. Wanna hear a fact about this reptile?");
-//			}
-//		}
-//		for(int j = 0 ; j < a.length() ; j++) {
-//			if(ChatbotMain.findKeyword(a, hate[j], 0) >= 0) {
-//				ChatbotMain.print("Aww, thats too bad! I don't think that reptile sucks but ok.");
-//			}
-//		}
-//	}
-		}
+	
 }
+
