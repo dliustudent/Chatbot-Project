@@ -85,7 +85,7 @@ public class ChatbotDerek implements Topic {
 		else {
 			initialWord = s;
 		}
-	}
+	} 
 	
 	public void setFto0() {
 		if (setFbackto0 == false) {
