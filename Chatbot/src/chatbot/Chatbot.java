@@ -4,10 +4,12 @@ public class Chatbot {
 
 	private static String username;
 	private boolean chatting;
+	private boolean introduction;
 	private Topic Derek;
 	private Topic David;
 	private Topic Raymond;
 	private Topic Vincent;
+	
 	
 	
 	public Chatbot() { 
@@ -16,7 +18,8 @@ public class Chatbot {
 		Raymond = new ChatbotRaymond();
 		Vincent = new ChatbotVincent();
 		username = "Unknown User";
-		chatting = true;		
+		chatting = true;	
+		introduction = false;
 	}  
 	public static String getUsername() {
 		return username;
@@ -70,26 +73,55 @@ public class Chatbot {
 		
 
 	}
-	public void returnChatting() {
+	public void returnChatting(String b,String emotion) {
 		chatting = true;
 		while(chatting) {
-			ChatbotMain.print("Welcome back what types of animals do you want to talk about now!");
+			if (introduction == false) {
+				if(emotion.equals("Mad")) {
+					ChatbotMain.print("Im still mad at you but what do you want to talk about now ");
+					introduction = true;
+				}else {
+					ChatbotMain.print("Welcome back you just talked about " + b + " what other tpes animals do you want to talk about now!");
+					introduction = true;
+				}
+			}
 			String response = ChatbotMain.getInput();
+			
 			if(Derek.isTriggered(response)) {
-				chatting = false; //exits the while loop, IMPORTANT FOR GRADE
-				Derek.talk(response);
+				if(b.equals("Bird")) {
+					ChatbotMain.print("We talked about "+b+" lets talked about another animal");
+					returnChatting(b,emotion);
+				}else {
+					chatting = false;
+					Derek.talk(response);
+				}
 			} 
 			else if (David.isTriggered(response)) {
-				chatting = false;
-				David.talk(response);
+				if(b.equals("Birds")) {
+					ChatbotMain.print("We talked about "+b+" lets talked about another animal");
+					returnChatting(b,emotion);
+				}else {
+					chatting = false;
+					David.talk(response);
+				}
 			}
 			else if (Vincent.isTriggered(response)) {
-				chatting = false;
-				Vincent.talk(response);
+				if(b.equals("Mammal")) {
+					ChatbotMain.print("We talked about "+b+" lets talked about another animal");
+					returnChatting(b,emotion);
+				}else {
+					chatting = false;
+					Vincent.talk(response);
+				}
 			}
 			else if (Raymond.isTriggered(response)) {
-				chatting = false;
-				Raymond.talk(response);
+				if(b.equals("Insect")){
+					ChatbotMain.print("We talked about "+b+" lets talked about another animal");
+					returnChatting(b,emotion);
+				}else {
+					chatting = false;
+					Raymond.talk(response);
+				}
 			}
 			else 
 			{
