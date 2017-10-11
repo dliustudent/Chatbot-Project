@@ -37,8 +37,8 @@ public class ChatbotVincent implements Topic {
 	
 	public ChatbotVincent() {
 	
-		String[] temp = {"Mammal","Mammals","x","x","x","x","x"}; // didn't want to do try catch for for loop
-		keywords = temp;
+		String[] temp = {"Mammal","Mammals","x","x","x","x","x"}; // didn't want to do try catch for the for loop
+		keywords = temp;										  // added extra data into array so it doesn't go exception out of bound
 		
 		String[] real = {"lion","elephant","panda","dog","cat","gorilla"};
 		actualKey = real;
@@ -93,10 +93,10 @@ public class ChatbotVincent implements Topic {
 			if(gibberishMad < 3) {
 				gibberishMad += 1;
 				String word = "";
-				for(int i = 0; i<actualKey.length; i++) {
-					if(handleCondition(actualKey[i])) {
+				for(int i = 0; i<actualKey.length; i++) { // helper statement
+					if(handleCondition(actualKey[i])) { // return all the animals that you didn't talk about yet
 						if(i == actualKey.length - 1) {
-							word += "and "+actualKey[i]+"s ";
+							word += "and "+actualKey[i]+"s "; // add "and" in front of second to last word
 						}else {
 							word += actualKey[i]+"s ";
 						}
@@ -181,7 +181,7 @@ public class ChatbotVincent implements Topic {
 					}
 			}else if (ChatbotMain.findKeyword(b, "dog", 0) >= 0) {
 				lastTalk = "dog";
-				ChatbotMain.print("A dogfs sense of smell is more than 1 million times stronger than that of a person. Do you like them!");
+				ChatbotMain.print("A dogs sense of smell is more than 1 million times stronger than that of a person. Do you like them!");
 				response = ChatbotMain.getInput();
 				while(continueWhile == true) {
 					if(ChatbotMain.findKeyword(response, "Yes", 0)>= 0){
@@ -257,7 +257,7 @@ public class ChatbotVincent implements Topic {
 		return;
 		
 	}
-	public boolean handleCondition(String b){
+	public boolean handleCondition(String b){ // checks for the logic for likes and dislikes
 		return (!likes.contains(b) && dislikes.contains(b)) || (likes.contains(b) && dislikes.contains(b)) || (!likes.contains(b) && !dislikes.contains(b));
 	}
 	public void handleLike(String b) {
