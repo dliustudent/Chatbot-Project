@@ -80,7 +80,7 @@ public class ChatbotDavid implements Topic {
 				while(response.equals(birdtype[2])||response.equals(birdtype[6])) 
 				{
 					bird = "vultures";
-					//likes and dislikes
+					
 					ChatbotMain.print("Ughhh, why vulture? Don't tell me you like them.");
 					response = ChatbotMain.getInput();
 					
