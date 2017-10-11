@@ -22,7 +22,7 @@ public class ChatbotDavid implements Topic {
 	private String[] birdtype;
 	
 	public ChatbotDavid() {
-		String[] birdlist = {"eagle","penguin","vulture","hummingbird"};
+		String[] birdlist = {"eagle","penguin","vulture","hummingbird","eagles","penguins","vultures","hummingbirds"};
 		birdtype = birdlist; 
 		
 		String[] temp = {"birds","bird"};
@@ -65,7 +65,7 @@ public class ChatbotDavid implements Topic {
 		{	
 			while(!response.equals(goodbyeKeyword)) {
 				
-				while(response.equals(birdtype[0])) {
+				while(response.equals(birdtype[0])||response.equals(birdtype[4])) {
 					bird = "eagles";
 					ChatbotMain.print("Great eagles are my favorite types of birds. Do you like eagles"); 
 					response = ChatbotMain.getInput();
@@ -74,7 +74,7 @@ public class ChatbotDavid implements Topic {
 					break;
 				}
 				
-				while(ChatbotMain.findKeyword(response, birdtype[2], 0) >=0 ) 
+				while(response.equals(birdtype[2])||response.equals(birdtype[6])) 
 				{
 					bird = "vultures";
 					//likes and dislikes
@@ -134,7 +134,7 @@ public class ChatbotDavid implements Topic {
 						response = "penguins";
 						talk(response);
 				}
-				while(ChatbotMain.findKeyword(response, birdtype[1], 0) >=0 )
+				while(response.equals(birdtype[1])||response.equals(birdtype[5]))
 				{
 					bird = "penguins";
 					ChatbotMain.print("Don't you just find Penguins adorable?");
@@ -150,7 +150,7 @@ public class ChatbotDavid implements Topic {
 					
 					
 				}
-				while(ChatbotMain.findKeyword(response, birdtype[3], 0) >=0 )
+				while(response.equals(birdtype[3])||response.equals(birdtype[7]))
 				{
 					bird = "hummingbirds";
 					ChatbotMain.print("Do you like hummingbird?");
