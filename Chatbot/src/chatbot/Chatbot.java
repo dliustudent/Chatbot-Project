@@ -88,7 +88,7 @@ public class Chatbot {
 			String response = ChatbotMain.getInput();
 			
 			if(Derek.isTriggered(response)) {
-				if(b.equals("Bird")) {
+				if(b.equals("Reptiles")) {
 					ChatbotMain.print("We talked about "+b+" lets talked about another animal");
 					returnChatting(b,emotion);
 				}else {

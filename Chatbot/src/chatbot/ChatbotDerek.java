@@ -62,7 +62,7 @@ public class ChatbotDerek implements Topic {
 		 while(!response.equals(goodbyeKeyword)) {
 				for(int i = 0 ; i < keywords.length ; i++) {
 					if(ChatbotMain.findKeyword(response, secretKeyword, 0) >= 0) {
-						secretResponse = "Wow! You know about skinks? You are amazing!(you can try repeating my message or move on)";
+						secretResponse = "Wow! You know about skinks? You are amazing!(you can try typing out my message again or move on)";
 						copy(response);
 						chatbotPrint(secretResponse);
 						response = ChatbotMain.getInput();
@@ -107,13 +107,15 @@ public class ChatbotDerek implements Topic {
 	
 	public void emotion(){
 		response2 = ChatbotMain.getInput();
-		for(int i = 0 ; i < response2.length() ; i++) {
+		for(int i = 0 ; i < love.length ; i++) {
 		if(ChatbotMain.findKeyword(response2, love[i], 0) >= 0) {
 				chatbotPrint(("Wow! I like " +thingLiked+ " too! Do you want to hear a fact about " +thingLiked+ "?"));
+				System.out.println(thingLiked);
 				copy(response2);
+				fact();
 			}
 		}
-		for(int j = 0 ; j < response2.length() ; j++) {
+		for(int j = 0 ; j < hate.length ; j++) {
 			if(ChatbotMain.findKeyword(response2, hate[j], 0) >= 0) {
 				chatbotPrint("Aww, thats too bad! I don't think that" +thingLiked+ "sucks but whatever.");
 				copy(response2);
@@ -123,12 +125,23 @@ public class ChatbotDerek implements Topic {
 		}
 	}
 	
-	
 	public void fact() {
-		if(thingLiked == "alligator") {
+		if(thingLiked == "lizard") {
 			chatbotPrint("Alligators are all igators made from apple himselfxd");
 		}
 		if(thingLiked == "alligator") {
+			chatbotPrint("Alligators are all igators made from apple himselfxd");
+		}
+		if(thingLiked == "turtle") {
+			chatbotPrint("Alligators are all igators made from apple himselfxd");
+		}
+		if(thingLiked == "snake") {
+			chatbotPrint("Alligators are all igators made from apple himselfxd");
+		}
+		if(thingLiked == "crocodile") {
+			chatbotPrint("Alligators are all igators made from apple himselfxd");
+		}
+		if(thingLiked == "tortoise") {
 			chatbotPrint("Alligators are all igators made from apple himselfxd");
 		}
 	}
