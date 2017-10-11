@@ -157,24 +157,59 @@ public class ChatbotDavid implements Topic {
 			
 				while(response.equals(birdtype[1])||response.equals(birdtype[5]))
 				{
+					if(likes.contains("penguins"))
+					{
+						double ran = Math.random()*4;	
+						ChatbotMain.print("Here is a fun fact "+penguin[(int) ran]+" do you wanna hear more.");
+						response = ChatbotMain.getInput();
+						if(response.contains("yes"))
+						{
+							while(response.contains("yes"))
+							{	
+								ChatbotMain.print("Here is another fun fact "+penguin[(int) ran-1]+" do you wanna hear more.");
+								response = ChatbotMain.getInput();
+							}
+						}	
+						else
+						{
+							otherBirds();
+						}
+					}
 					bird = "penguins";
 					ChatbotMain.print("Don't you just find Penguins adorable?");
 					response = ChatbotMain.getInput();
 					likesOrDislikes();
 					
-					if(likes.contains("penguins"))
-					{
-						double ran = Math.random()*4;	
-						ChatbotMain.print(penguin[(int) ran]);
-						response = ChatbotMain.getInput();
-					}
+					
 				}
 				while(response.equals(birdtype[3])||response.equals(birdtype[7]))
 				{
+					
+					if(likes.contains("hummingbird"))
+					{
+						double ran = Math.random()*4;	
+						ChatbotMain.print("Here is a fun fact "+hummingbird[(int) ran]+" do you wanna hear more.");
+						response = ChatbotMain.getInput();
+						if(response.contains("yes"))
+						{
+							while(response.contains("yes"))
+							{	
+								ChatbotMain.print("Here is another fun fact "+hummingbird[(int) ran-1]+" do you wanna hear more.");
+								response = ChatbotMain.getInput();
+							}
+						}	
+						else
+						{
+							otherBirds();
+						}
+					}
+					
+					
 					bird = "hummingbirds";
 					ChatbotMain.print("Do you like hummingbird?");
 					response = ChatbotMain.getInput();
 					likesOrDislikes();
+					
 					
 				}
 			}
@@ -327,7 +362,7 @@ public class ChatbotDavid implements Topic {
 			else
 			{
 				likes = ""+"penguins ";
-				ChatbotMain.print("I love penguins. They are so cute.");
+				ChatbotMain.print("I love penguins too. They are so cute.");
 				response = ChatbotMain.getInput();
 			}
 		}
@@ -353,6 +388,13 @@ public class ChatbotDavid implements Topic {
 				response = ChatbotMain.getInput();
 			}
 		}
+	}
+	public void otherBirds()
+	{
+		ChatbotMain.print("Okay fine what other birds do you want to talk about?");
+		response = ChatbotMain.getInput();
+		checkIfBird(response);
+		talk(response);
 	}
 	
 	@Override
