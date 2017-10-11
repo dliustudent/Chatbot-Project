@@ -19,7 +19,7 @@ public class ChatbotDerek implements Topic {
 	private boolean setFbackto0;
 	private String response2;
 	private String thingLiked;
-	
+	private String initialWord;
 	
 	public ChatbotDerek() {
 
@@ -34,6 +34,7 @@ public class ChatbotDerek implements Topic {
 		love = b;
 		String[] d = {"hate", "dislike", "no"};
 		hate = d;
+		initialWord = "";
 	//String[] fac = {"same"};
 	//	fact = fac;
 	}
@@ -60,14 +61,14 @@ public class ChatbotDerek implements Topic {
 		 while(!response.equals(goodbyeKeyword)) {
 				for(int i = 0 ; i < keywords.length ; i++) {
 					if(ChatbotMain.findKeyword(response, secretKeyword, 0) >= 0) {
-						secretResponse = "Wow! You know about skinks? You are amazing!";
+						secretResponse = "Wow! You know about skinks? You are amazing!(you can try repeating my message or move on)";
 						copy(response);
 						ChatbotMain.print(secretResponse);
 						response = ChatbotMain.getInput();
 					}else if (ChatbotMain.findKeyword(response, keywords[i], 0) >= 0) {
 						talk2(response);
 						response = ChatbotMain.getInput();
-						copy2(response);
+						copy(response);
 						
 					}
 				} 
@@ -75,35 +76,16 @@ public class ChatbotDerek implements Topic {
 				 ChatbotMain.print("Try typing alligator, crocodile, lizard, snake, turtle, or tortoise");
 				 response = ChatbotMain.getInput();}
 			}
-		 	
-	public void copy(String response) {
-		if(secretResponse.equals(response)) {
+		 
+	public void copy(String s) {
+		if(initialWord.equals(s)) {
 			ChatbotMain.print("Stop copying me!");
-			f++;
 			response = ChatbotMain.getInput();
 		}
-		if (f>1) {
-			ChatbotMain.print("Im for real stop!"); 
-			response = ChatbotMain.getInput();
+		else {
+			initialWord = s;
 		}
-		
-		}
-	
-	public void copy2(String response) {
-		if(regularResponse.equals(response)) {
-			ChatbotMain.print("Stop copying me!");
-			f++;
-			response = ChatbotMain.getInput();
-		}
-		if (f>1) {
-			ChatbotMain.print("Im for real stop!");
-			response = ChatbotMain.getInput();
-			setFbackto0 = false;
-			setFto0();
-
-		}
-		
-	}
+	} 
 	
 	public void setFto0() {
 		if (setFbackto0 == false) {
@@ -121,17 +103,20 @@ public class ChatbotDerek implements Topic {
 	
 	public void emotion(){
 		response2 = ChatbotMain.getInput();
-		for(int i = 0 ; i < response2.length() ; i++) {
-		if(ChatbotMain.findKeyword(response2, love[i], 0) >= 0) {
-				ChatbotMain.print(("Wow! I like " +thingLiked+ " too! Do you want to hear a fact about " +thingLiked+ "?"));
-			}
-		}
-		for(int j = 0 ; j < response2.length() ; j++) {
-			if(ChatbotMain.findKeyword(response2, hate[j], 0) >= 0) {
-				ChatbotMain.print("Aww, thats too bad! I don't think that reptile sucks but ok.");
-			}
-	}
-		}
+//		for(int i = 0 ; i < response2.length() ; i++) {
+//		if(ChatbotMain.findKeyword(response2, love[i], 0) >= 0) {
+//				ChatbotMain.print(("Wow! I like " +thingLiked+ " too! Do you want to hear a fact about " +thingLiked+ "?"));
+//			}
+//		}
+//		for(int j = 0 ; j < response2.length() ; j++) {
+//			if(ChatbotMain.findKeyword(response2, hate[j], 0) >= 0) {
+//				ChatbotMain.print("Aww, thats too bad! I don't think that" +thingLiked+ "sucks but whatever.");
+//				talk(response);
+//				response = ChatbotMain.getInput();
+//				
+//			}
+//	}
+//		}
 	
 }
-
+}
