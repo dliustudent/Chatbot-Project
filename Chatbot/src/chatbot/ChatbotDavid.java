@@ -105,9 +105,7 @@ public class ChatbotDavid implements Topic {
 							}
 							ChatbotMain.print("I see you like Vultures because"+" "+reasons+".");
 						}
-						ChatbotMain.print("Stop typing nonsense and answer the question.");
-						response = "vulture";
-						talk(response);
+						
 					}					
 					double ran = Math.random()*3;					
 					ChatbotMain.print("Well did you know that" +" "+ vulture[(int) ran]+" Do you still want to talk about Vultures?");
@@ -116,8 +114,10 @@ public class ChatbotDavid implements Topic {
 					
 					if(response.equals(reply[1]))
 					{
-						ChatbotMain.print("Okay here is another fact "+vulture[(int) ran]);
-						
+						ChatbotMain.print("Since you don't like vultures, lets talk about penguins.");
+						bird = "penguins";
+						response = "penguins";
+						talk(response);
 					}
 					else
 					{
@@ -145,14 +145,15 @@ public class ChatbotDavid implements Topic {
 									response = ChatbotMain.getInput();
 
 								}
+								
+								
 							}
 						}
+					
 					}
 				}	
 						
-					ChatbotMain.print("Wow you are so smart, lets talk about penguins next.");
-					bird = "penguins";
-					talk(response);
+					
 			
 				while(response.equals(birdtype[1])||response.equals(birdtype[5]))
 				{
