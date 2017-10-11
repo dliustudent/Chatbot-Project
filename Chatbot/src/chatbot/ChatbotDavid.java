@@ -63,11 +63,12 @@ public class ChatbotDavid implements Topic {
 		}
 		if(checkbird==true)
 		{	
-			while(!response.equals(goodbyeKeyword)) {
+			while(!response.equals(goodbyeKeyword)) 
+			{
 				
 				while(response.equals(birdtype[0])||response.equals(birdtype[4])) {
 					bird = "eagles";
-					ChatbotMain.print("Great eagles are my favorite types of birds. Do you like eagles"); 
+					ChatbotMain.print("Great eagles are my favorite types of birds. Do you like eagles?"); 
 					response = ChatbotMain.getInput();
 					likesOrDislikes();
 					continueTalking(response);
@@ -78,38 +79,53 @@ public class ChatbotDavid implements Topic {
 				{
 					bird = "vultures";
 					//likes and dislikes
-					ChatbotMain.print("Do you like Vulture?");
+					ChatbotMain.print("Ughhh, why vulture? Don't tell me you like them.");
 					response = ChatbotMain.getInput();
 					
-					if(response.equals(reply[1]))
+					if(response.contains(reply[1]))
 					{
 						ChatbotMain.print("Me too, I find them a little bit creepy.");
 						
 					}
 					else
 					{
-						likes = ""+"vultures ";
-						ChatbotMain.print("What?! You like vultures, well can you tell me why?");
-						response = ChatbotMain.getInput();
-						reasons = response;
-						ChatbotMain.print("I see you like Vultures because"+" "+reasons+".");
+						if(response.contains(reply[0]))
+						{
+							likes = ""+"vultures ";
+							ChatbotMain.print("What?! You like vultures, well can you tell me why?");
+							response = ChatbotMain.getInput();
+							reasons = response;
+							
+							while(reasons.contains("no"))
+							{
+								ChatbotMain.print("Why not please tell me.");
+								response = ChatbotMain.getInput();
+								reasons = response;
+								
+							}
+							ChatbotMain.print("I see you like Vultures because"+" "+reasons+".");
+						}
+						ChatbotMain.print("Stop typing nonsense and answer the question.");
+						response = "vulture";
+						talk(response);
 					}					
 					double ran = Math.random()*3;					
-					ChatbotMain.print("Well did you know that" +" "+ vulture[(int) ran]);
+					ChatbotMain.print("Well did you know that" +" "+ vulture[(int) ran]+" Do you still want to talk about Vultures?");
+					
+					response = ChatbotMain.getInput();
+					
 					if(response.equals(reply[1]))
 					{
 						ChatbotMain.print("Okay here is another fact "+vulture[(int) ran]);
-						break;
+						
 					}
 					else
 					{
-						if(likes.equals("vultures"))
+						if(likes.contains("vultures"))
 						{	
-							ChatbotMain.print("Hey, why don't you tell me about Vulture since you think"+" "+reasons);
+							ChatbotMain.print("Okay, why don't you tell me something about Vulture since you think"+" "+reasons+".");
 							response = ChatbotMain.getInput();
 							userFacts = ""+response;
-							
-							
 							if(userFacts.equals(vulture[(int) ran]))
 							{
 								ChatbotMain.print("Hey I just told you that!");
@@ -117,23 +133,27 @@ public class ChatbotDavid implements Topic {
 							}
 							else
 							{	
-								if(userFacts.contains("vulture"))
+								if(userFacts.contains("vulture")||userFacts.contains("they"))
 								{	
-
 									ChatbotMain.print("Wow you are so smart."+" "+"I never knew that vultures"+userFacts);
 									response = ChatbotMain.getInput();
 								}	
 								else
 								{
-									ChatbotMain.print("Hey, I thought we are talking about Vultures.");
+									ChatbotMain.print("Hey, stop typing nonsense, I thought we are talking about Vultures.");
+									ChatbotMain.print("Come on tell me a fact about Vultures.");
 									response = ChatbotMain.getInput();
+
 								}
 							}
 						}
-						ChatbotMain.print("Lets talk about Penguins.");
-						response = "penguins";
-						talk(response);
-				}
+					}
+				}	
+						
+					ChatbotMain.print("Wow you are so smart, lets talk about penguins next.");
+					bird = "penguins";
+					talk(response);
+			
 				while(response.equals(birdtype[1])||response.equals(birdtype[5]))
 				{
 					bird = "penguins";
@@ -143,12 +163,10 @@ public class ChatbotDavid implements Topic {
 					
 					if(likes.contains("penguins"))
 					{
+						double ran = Math.random()*4;	
 						ChatbotMain.print(penguin[(int) ran]);
 						response = ChatbotMain.getInput();
 					}
-					
-					
-					
 				}
 				while(response.equals(birdtype[3])||response.equals(birdtype[7]))
 				{
@@ -170,27 +188,16 @@ public class ChatbotDavid implements Topic {
 				{	
 					ChatbotMain.print("I still cannot believe you don't like "+dislikes);
 				}
-			
-			
 				ChatbotMain.chatbot.startChatting();
-			}
-		}	
+		}
+			
 	}
 	
 	public void continueTalking(String response) {
 		
 		//display facts until no facts left then ask user for facts
-		if(response.equals(reply[3]))
-		{
-			ChatbotMain.print("Well make up your mind. Do you want to hear another fact or not.");
-			continueTalking(response);
-		}
-		else
-		{
-			ChatbotMain.print("Okay fine what other birds do you want to talk about?");
-			response = ChatbotMain.getInput();
-			talk(response);
-		}
+
+		
 		if(response.equals(reply[0]))
 		{
 			ChatbotMain.print("Okay here is another fact did you know that"+" "+ eaglesFacts[questionNum] + " " + "So" + " " + ChatbotMain.chatbot.getUsername() + " " + "do you still want to talk about Eagles?" );
@@ -204,11 +211,20 @@ public class ChatbotDavid implements Topic {
 		}
 		else
 		{
-			ChatbotMain.print("Okay fine what other birds do you want to talk about?");
-			response = ChatbotMain.getInput();
+			
+			if(response.equals(reply[3]))
+			{
+				ChatbotMain.print("Well make up your mind. Do you want to hear another fact or not.");
+				continueTalking(response);
+			}
+			else
+			{
+				ChatbotMain.print("Okay fine what other birds do you want to talk about?");
+				response = ChatbotMain.getInput();
+				checkIfBird(response);
+				talk(response);
+			}
 		}
-		
-		
 	}
 	
 	public void question(String response)
@@ -236,6 +252,7 @@ public class ChatbotDavid implements Topic {
 	
 	public void checkIfBird(String response){
 		//check to see if the user enter a bird gets angry when it is not a bird.
+		bird = response;
 		int check = 0;
 		for(int i=0; i<birdtype.length; i++)
 		{
@@ -275,7 +292,6 @@ public class ChatbotDavid implements Topic {
 			if(check>0) 
 			{
 				checkbird = true;
-				ChatbotMain.print("Finally you enter a bird now we can continue.");
 				talk(response);
 			}
 	}
