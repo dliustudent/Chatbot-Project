@@ -43,7 +43,7 @@ public class ChatbotVincent implements Topic {
 		String[] real = {"lion","elephant","panda","dog","cat","gorilla"};
 		actualKey = real;
 		
-		String[] hate = {"ugly","bad","big","rude","stupid","bad","vulgar","weak"};
+		String[] hate = {"ugly","bad","big","rude","stupid","bad","vulgar","weak","stupid","weak","rotten","horrible","gross"};
 		hateWords = hate;
 		
 		startedConversation = false;
@@ -292,9 +292,8 @@ public class ChatbotVincent implements Topic {
 		ChatbotMain.print("What why do you hate them?");
 		dislikes += b+" ";
 		response = ChatbotMain.getInput();
-		System.out.println(checkForBadWord(response));
 		if (!checkForBadWord(response).equals("nothing")) {
-			ChatbotMain.print("It doesn't matter if they are "+checkForBadWord(response) + " " + b + " still cool");
+			ChatbotMain.print("It doesn't matter if they are "+checkForBadWord(response) + " " + b + "s are still cool");
 		}else {
 			ChatbotMain.print("It doesn't matter they are still cool");
 		}
