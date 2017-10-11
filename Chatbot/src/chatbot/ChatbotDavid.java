@@ -4,7 +4,6 @@ public class ChatbotDavid implements Topic {
 	
 	private String[] keywords;
 	private String goodbyeKeyword;
-	private String secretKeyword;
 	private String response;
 	private String[] eaglesFacts;
 	private String[] reply;
@@ -20,17 +19,20 @@ public class ChatbotDavid implements Topic {
 	boolean checkbird;
 	boolean firstTalk;
 	private String bird;
+	private String[] birdtype;
 	
 	public ChatbotDavid() {
-		String[] temp = {"eagle","penguin","vulture","hummingbird","birds","bird"};
+		String[] birdlist = {"eagle","penguin","vulture","hummingbird"};
+		birdtype = birdlist; 
+		
+		String[] temp = {"birds","bird"};
 		keywords = temp;
 		goodbyeKeyword = "bye";
-		secretKeyword = "bird";
 		response = "";
 		String[] facts1 = {"Most of the 60 species of eagles are from Eurasia and Africa. Outside this area, just 14 species can be found two in North America, nine in Central and South America, and three in Australia.","Eagles normally build their nests, called eyries, in tall trees or on high cliffs. Many species lay two eggs, but the older, larger chick frequently kills its younger sibling once it has hatched.","Like all birds of prey, eagles have very large, hooked beaks for ripping flesh from their prey, strong, muscular legs, and powerful talons.","The Bald eagle can fly to a speed of 75 to 99 mph."};
 		String[] facts2 = {"Emperor Penguins are the tallest species, standing nearly 4 feet tall.","3. The fastest species is the Gentoo Penguin, which can reach swimming speeds up to 22 mph.","All but two species of penguins breed in large colonies of up to a thousand birds."}; 
 		String[] facts3 = {"Vultures are found on every continent except Australia and Antarctica.", "Vultures only lay one egg every year or so.", "A vulture can eat up to 1 kilogram (about 2 pounds) in a single meal (that's over 10% of their body weight)."};
-		String[] facts4 = {"Hummingbirds are the only birds that can fly backwards.", "Some hummingbirds fly at speeds greater than 33 miles per hour.", "A hummingbird's wing beats take up so much energy, they spend the majority of their time resting on branches and twigs."};
+		String[] facts4 = {"Hummingbirds are the only birds that can fly backwards.", "Some hummingbirds fly at speeds greater than 33 miles per hour.", "A hummingbird's hearts can beat as fast as 1,260 beats per minute", "A Hummingbird wings move at a rate of 80 beats per second."};
 		penguin = facts2;
 		vulture = facts3;
 		hummingbird = facts4;
@@ -63,7 +65,7 @@ public class ChatbotDavid implements Topic {
 		{	
 			while(!response.equals(goodbyeKeyword)) {
 				
-				while(response.equals(keywords[0])) {
+				while(response.equals(birdtype[0])) {
 					bird = "eagles";
 					ChatbotMain.print("Great eagles are my favorite types of birds. Do you like eagles"); 
 					response = ChatbotMain.getInput();
@@ -72,8 +74,9 @@ public class ChatbotDavid implements Topic {
 					break;
 				}
 				
-				while(ChatbotMain.findKeyword(response, keywords[2], 0) >=0 ) 
+				while(ChatbotMain.findKeyword(response, birdtype[2], 0) >=0 ) 
 				{
+					bird = "vultures";
 					//likes and dislikes
 					ChatbotMain.print("Do you like Vulture?");
 					response = ChatbotMain.getInput();
@@ -81,11 +84,11 @@ public class ChatbotDavid implements Topic {
 					if(response.equals(reply[1]))
 					{
 						ChatbotMain.print("Me too, I find them a little bit creepy.");
-						break;
+						
 					}
 					else
 					{
-						likes = "vultures";
+						likes = ""+"vultures ";
 						ChatbotMain.print("What?! You like vultures, well can you tell me why?");
 						response = ChatbotMain.getInput();
 						reasons = response;
@@ -131,19 +134,47 @@ public class ChatbotDavid implements Topic {
 						response = "penguins";
 						talk(response);
 				}
-				while(ChatbotMain.findKeyword(response, keywords[1], 0) >=0 )
+				while(ChatbotMain.findKeyword(response, birdtype[1], 0) >=0 )
 				{
 					bird = "penguins";
 					ChatbotMain.print("Don't you just find Penguins adorable?");
 					response = ChatbotMain.getInput();
 					likesOrDislikes();
 					
+					if(likes.contains("penguins"))
+					{
+						ChatbotMain.print(penguin[(int) ran]);
+						response = ChatbotMain.getInput();
+					}
+					
+					
+					
+				}
+				while(ChatbotMain.findKeyword(response, birdtype[3], 0) >=0 )
+				{
+					bird = "hummingbirds";
+					ChatbotMain.print("Do you like hummingbird?");
+					response = ChatbotMain.getInput();
+					likesOrDislikes();
+					
 				}
 			}
 			//access variables from other classes.
-			ChatbotMain.print("Well, it was nice talking with you, "+ChatbotMain.chatbot.getUsername()+" "+"I recommend going to the get some food now!");
-			ChatbotMain.chatbot.startChatting();
-		}	}
+				ChatbotMain.print("Well, it was nice talking with you, "+ChatbotMain.chatbot.getUsername());
+				
+				if(likes.contains("eagle") || likes.contains("vulture") || likes.contains("hummingbird") || likes.contains("penguins") )
+				{	
+					ChatbotMain.print("I learn alot about you like "+likes);
+				}
+				if(dislikes.contains("eagle") || dislikes.contains("vulture") || dislikes.contains("hummingbird") || dislikes.contains("penguins") )
+				{	
+					ChatbotMain.print("I still cannot believe you don't like "+dislikes);
+				}
+			
+			
+				ChatbotMain.chatbot.startChatting();
+			}
+		}	
 	}
 	
 	public void continueTalking(String response) {
@@ -160,7 +191,6 @@ public class ChatbotDavid implements Topic {
 			response = ChatbotMain.getInput();
 			talk(response);
 		}
-		
 		if(response.equals(reply[0]))
 		{
 			ChatbotMain.print("Okay here is another fact did you know that"+" "+ eaglesFacts[questionNum] + " " + "So" + " " + ChatbotMain.chatbot.getUsername() + " " + "do you still want to talk about Eagles?" );
@@ -175,7 +205,10 @@ public class ChatbotDavid implements Topic {
 		else
 		{
 			ChatbotMain.print("Okay fine what other birds do you want to talk about?");
+			response = ChatbotMain.getInput();
 		}
+		
+		
 	}
 	
 	public void question(String response)
@@ -204,9 +237,9 @@ public class ChatbotDavid implements Topic {
 	public void checkIfBird(String response){
 		//check to see if the user enter a bird gets angry when it is not a bird.
 		int check = 0;
-		for(int i=0; i<keywords.length; i++)
+		for(int i=0; i<birdtype.length; i++)
 		{
-			if(keywords[i].equals(response))
+			if(birdtype[i].equals(response))
 			{
 				check++;
 			}
@@ -233,10 +266,8 @@ public class ChatbotDavid implements Topic {
 					{
 						if(rageCounter>=5)
 						{
-							ChatbotMain.print("I don't want to talk with you anymore.");
-							rageCounter++;
-							response = ChatbotMain.getInput();
-							checkIfBird(response);
+							ChatbotMain.print("I don't wanna to talk with you anymore, goodbye.");
+							rageCounter++; //ends the chatbot 
 						}
 					}		
 				}
@@ -258,10 +289,11 @@ public class ChatbotDavid implements Topic {
 				response = ChatbotMain.getInput();
 				reasons = response;
 				ChatbotMain.print("Oh I see you don't like eagles because"+" "+reasons);
-				dislikes = "eagle";
+				dislikes = ""+"eagle ";
 			}
 			else
 			{
+				likes = ""+"eagle ";
 				ChatbotMain.print("What no way you like eagles too"+" "+"Did you know that"+" "+ eaglesFacts[0] + " " + "So" + " " + ChatbotMain.chatbot.getUsername() + " " + "do you still want to talk about Eagles?");
 				response = ChatbotMain.getInput();
 				continueTalking(response);
@@ -271,7 +303,37 @@ public class ChatbotDavid implements Topic {
 		{
 			if(response.equals(reply[1]))
 			{
+				dislikes = ""+"penguins ";
 				ChatbotMain.print("What you don't think Penguins are cute?!");
+				response = ChatbotMain.getInput();
+			}
+			else
+			{
+				likes = ""+"penguins ";
+				ChatbotMain.print("I love penguins. They are so cute.");
+				response = ChatbotMain.getInput();
+			}
+		}
+		if(bird.equals("hummingbird"))
+		{
+			if(response.equals(reply[1]))
+			{
+				ChatbotMain.print("Why don't you like hummingbird?");
+				response = ChatbotMain.getInput();
+				reasons = response;
+				ChatbotMain.print("I see you don't like hummingbird because "+reasons);
+				ChatbotMain.print("Okay since you don't like hummingbird what kind of bird do you wanna talk about?");
+				dislikes = ""+"hummingbird ";
+				response = ChatbotMain.getInput();
+				talk(response);
+			}
+			else
+			{
+				ChatbotMain.print("I like hummingbird too. They might be small but they are really cool.");
+				likes = ""+"hummingbird ";
+				double ran = Math.random()*3;
+				ChatbotMain.print(hummingbird[(int) ran]);
+				response = ChatbotMain.getInput();
 			}
 		}
 	}
