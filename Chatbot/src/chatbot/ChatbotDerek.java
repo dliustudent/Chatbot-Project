@@ -118,7 +118,7 @@ public class ChatbotDerek implements Topic {
 				chatbotPrint("Aww, thats too bad! I don't think that" +thingLiked+ "sucks but whatever.");
 				copy(response2);
 				talk(response);
-				response = ChatbotMain.getInput();			
+				response = ChatbotMain.getInput();			 
 			}
 		}
 	}
