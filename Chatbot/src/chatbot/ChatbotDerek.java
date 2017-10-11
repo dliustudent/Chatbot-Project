@@ -110,10 +110,18 @@ public class ChatbotDerek implements Topic {
 		for(int i = 0 ; i < love.length ; i++) {
 		if(ChatbotMain.findKeyword(response2, love[i], 0) >= 0) {
 				chatbotPrint(("Wow! I like " +thingLiked+ " too! Do you want to hear a fact about " +thingLiked+ "?"));
+				response = ChatbotMain.getInput();
 				System.out.println(thingLiked);
 				copy(response2);
 				fact();
 			}
+		else {
+			chatbotPrint("Please type yes or no");
+			response = ChatbotMain.getInput();
+
+			emotion();
+		}
+		
 		}
 		for(int j = 0 ; j < hate.length ; j++) {
 			if(ChatbotMain.findKeyword(response2, hate[j], 0) >= 0) {
