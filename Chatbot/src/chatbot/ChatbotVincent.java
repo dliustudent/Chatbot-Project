@@ -181,7 +181,7 @@ public class ChatbotVincent implements Topic {
 						triggerMad += 1;
 						triggerAbout = b;
 					}else {
-						ChatbotMain.print("I know that you hate "+ b +" BUT LETS TALK ABOUT A DIFFERENT ANIMAL ALREADY, NOT " + b + " PLEASE.");
+						ChatbotMain.print("I know that you like "+ b +" BUT LETS TALK ABOUT A DIFFERENT ANIMAL ALREADY, NOT " + b + " PLEASE.");
 						continueWhile = false;
 					}
 				}else if (dislikes.contains(b)) {
