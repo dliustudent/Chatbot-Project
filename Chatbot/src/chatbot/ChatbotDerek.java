@@ -123,7 +123,7 @@ public class ChatbotDerek implements Topic {
                         break;
                     }else {
                         chatbotPrint(("I don't know what your talking about. This is a yes or no question"));
-                    }
+                    } 
                 }
                 
             }
