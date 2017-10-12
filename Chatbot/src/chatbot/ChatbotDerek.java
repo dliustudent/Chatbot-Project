@@ -120,17 +120,21 @@ public class ChatbotDerek implements Topic {
                 boolean again2 = false;
                 while(again2 == false) {
                     response2 = ChatbotMain.getInput();
-                    if(ChatbotMain.findKeyword(response2, "no", 0) >=0) {
-                        copy(response2);
-                        again2 = true;}
-                        else {
-                        	chatbotPrint("Please type no or yes");  
+                }
+                } else {
+             
+                	
+                        chatbotPrint("Please type no or yes");  
+                        emotion();
+                        break;
+                        
+                 
                     
-               } 
+               
            }
        }
    }
-}
+
    
 	public void fact() {
 		if(thingLiked.equals("lizard")) {
