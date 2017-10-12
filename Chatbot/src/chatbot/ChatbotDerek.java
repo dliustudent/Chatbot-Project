@@ -115,12 +115,21 @@ public class ChatbotDerek implements Topic {
         }
         for(int j = 0 ; j < hate.length ; j++) {
             if(ChatbotMain.findKeyword(response2, hate[j], 0) >= 0) {
-                chatbotPrint("Aww, thats too bad! I don't think that" +thingLiked+ "sucks but whatever.");
-                copy(response2);
+                chatbotPrint("Aww, thats too bad! I don't think that " +thingLiked+ " sucks but whatever. Next reptile.");
                 talk(response);
-                response = ChatbotMain.getInput();    
-         } 
-    }
+                boolean again2 = false;
+                while(again2 == false) {
+                    response = ChatbotMain.getInput();
+                    if(ChatbotMain.findKeyword(response, "yes", 0) >=0) {
+                        copy(response2);
+                        again2 = true;}
+                        else {
+                        	chatbotPrint("Please type nonono or yes");  
+                        	break;
+               } 
+           }
+       }
+   }
 }
    
 	public void fact() {
