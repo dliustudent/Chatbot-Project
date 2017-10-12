@@ -35,7 +35,7 @@ public class Chatbot {
 	
 	public Topic getRaymond() {
 		return Raymond;
-	}
+	} 
 	
 	public Topic getVincent() {
 		return Vincent;
