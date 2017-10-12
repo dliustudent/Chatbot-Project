@@ -115,16 +115,16 @@ public class ChatbotDerek implements Topic {
         }
         for(int j = 0 ; j < hate.length ; j++) {
             if(ChatbotMain.findKeyword(response2, hate[j], 0) >= 0) {
-                chatbotPrint("Aww, thats too bad! I don't think that " +thingLiked+ " sucks but whatever. Next reptile.");
+                chatbotPrint("Aww, thats too bad! I don't think that " +thingLiked+ " sucks but whatever.");
                 talk(response);
                 boolean again2 = false;
                 while(again2 == false) {
                     response = ChatbotMain.getInput();
-                    if(ChatbotMain.findKeyword(response, "yes", 0) >=0) {
+                    if(ChatbotMain.findKeyword(response, "no", 0) >=0) {
                         copy(response2);
                         again2 = true;}
                         else {
-                        	chatbotPrint("Please type nonono or yes");  
+                        	chatbotPrint("Please type no or yes");  
                         	break;
                } 
            }
@@ -143,7 +143,7 @@ public class ChatbotDerek implements Topic {
 			chatbotPrint("Turtles date back to the time of the dinosaurs, over 200 million years ago! Alright, lets talk about another reptile now.");
 		}
 		else if(thingLiked.equals("snake")) {
-			chatbotPrint("Snakes kill over 40,000 people a year—though, with unreported incidents, the total may be over 100,000. About half of these deaths are in India. Alright, lets talk about another reptile now.");
+			chatbotPrint("Snakes kill over 40,000 people a yearâ€”though, with unreported incidents, the total may be over 100,000. About half of these deaths are in India. Alright, lets talk about another reptile now.");
 		}
 		else if(thingLiked.equals("crocodile")) {
 			chatbotPrint("A crocodile's belly has gentle skin. The skin on their back contains bony structures (called osteoderms) which make skin bulletproof. Alright, lets talk about another reptile now.");
