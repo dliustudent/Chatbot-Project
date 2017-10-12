@@ -189,7 +189,7 @@ public class ChatbotVincent implements Topic {
 						ChatbotMain.print("I know that you hate "+ b +" but lets talk about a different mammal now");
 						continueWhile = false;
 						triggerMad += 1;
-						triggerAbout = b;
+						triggerAbout = b; 
 					}else {
 						ChatbotMain.print("I know that you hate "+ b +" BUT LETS TALK ABOUT A DIFFERENT ANIMAL ALREADY, NOT " + b + " PLEASE.");
 						continueWhile = false;
