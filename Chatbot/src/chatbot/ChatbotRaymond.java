@@ -51,7 +51,7 @@ public class ChatbotRaymond implements Topic {
 		vowelsFound = false;
 		conversation = true;
 		
-		favInsect = "";
+		favInsect = "insects"; //placeholder
 		rndInsect = "";
 		
 		madCount = 0;
@@ -70,6 +70,7 @@ public class ChatbotRaymond implements Topic {
 		Vincent = new ChatbotVincent();
 		ChatbotMain.print("I love talking about insects. What is your favorite insect?");
 		response = ChatbotMain.getInput();
+		checkBye(response);
 		favInsect = response;
 		if(isGibberish(response)) {
 			ChatbotMain.print("Hmm, interesting. I've never heard of " + response + " before.");
@@ -79,13 +80,13 @@ public class ChatbotRaymond implements Topic {
 		while(ChatbotMain.findKeyword(response, goodbyeKeyword, 0) == -1) {
 				longConversation();
 				int rnd = (int)(Math.random()*3);
-				if(rnd == 0) {
+				if(rnd == 0 && factsTold != 3) {
 					funFacts();
-				}else if(rnd == 1) {
+				}else if(rnd == 1 && gamesPlayed != 2) {
 					thinkingGame();
 				}
 				if(factsTold == 3 && gamesPlayed == 2) { 
-					ChatbotMain.multiLinePrint("I think we've had a good talk " + ChatbotMain.chatbot.getUsername() +" Is there any animal that is not an insect that you would like to talk about now?"); //redirect to other members
+					ChatbotMain.multiLinePrint("I think we've said enough " + ChatbotMain.chatbot.getUsername() +", Is there any animal that is not an insect that you would like to talk about now?"); //redirect to other members
 					response = ChatbotMain.getInput();
 					if(isInsultFound(response) || ChatbotMain.findKeyword(response, "no", 0) >= 0) {
 						ChatbotMain.print("Okay whatever.");
@@ -149,7 +150,11 @@ public class ChatbotRaymond implements Topic {
 			madComments(response);
 			ChatbotMain.print("Hmm, maybe there is something else we can do.");
 		} else {
-			ChatbotMain.print("Would you like to hear a fun fact?");
+			if(factsTold == 0) {
+				ChatbotMain.print("Would you like to hear a fun fact?");
+			} else {
+				ChatbotMain.print("One more fact?");
+			}
 			response = ChatbotMain.getInput();
 			for(int i = 0; i < okPhrase.length; i++) {
 				if(ChatbotMain.findKeyword(response, okPhrase[i], 0) >= 0) {
@@ -162,10 +167,12 @@ public class ChatbotRaymond implements Topic {
 			}
 			if(!told) {
 				ChatbotMain.print("Ok fine..");
+				factsTold++; //still add to break the loop
 				madCount ++;
 			}
 		} 
 		response = ChatbotMain.getInput(); 
+		madComments(response);
 		
 	}
 	public boolean yourYoure(String response) {
@@ -178,7 +185,11 @@ public class ChatbotRaymond implements Topic {
 		boolean correct = false;
 		int wrongCount = 0;
 		gamesPlayed ++;
-		ChatbotMain.print("I am thinking of an insect, try to guess it.");
+		if(gamesPlayed < 2) {
+			ChatbotMain.print("Okay, I am thinking of an insect, try to guess it.");
+		} else {
+			ChatbotMain.print("Okay, last guessing game.Try to guess the insect I am thinking of again.");
+		}
 		rndInsect = listInsects[(int)(Math.random()*listInsects.length)];
 		while(!correct) {
 			response = ChatbotMain.getInput();
@@ -221,6 +232,9 @@ public class ChatbotRaymond implements Topic {
 				} 
 				x = false; //exit
 				if(!like) {
+					if(isGibberish(response.toLowerCase())) {
+						ChatbotMain.multiLinePrint("I'm not sure I understand you...");
+					}
 					ChatbotMain.multiLinePrint("Well, hopefully you'll see how cool they are.");
 				}
 			}
@@ -245,7 +259,7 @@ public class ChatbotRaymond implements Topic {
 			while(!insectConvo) {
 				if(ChatbotMain.findKeyword(response, "bees", 0) >= 0) {
 					insectConvo = true;
-					ChatbotMain.print("Alright, would you rather be a queen bee or a worker bee?");
+					ChatbotMain.print("Alright, I want to know you better. Would you rather be a queen bee or a worker bee?");
 					response = ChatbotMain.getInput();
 					checkBye(response);
 					if(ChatbotMain.findKeyword(response, "queen", 0) >= 0) {
@@ -287,9 +301,9 @@ public class ChatbotRaymond implements Topic {
 		checkBye(response);
 		if(ChatbotMain.findKeyword(response, "ladybug", 0) >= 0) {
 			ChatbotMain.print("Correct!");
+			happyCount++;
 		}else {
 			ChatbotMain.print("... wrong. It was the ladybug");
-			madCount++;
 		}
 		conversation = false; //will never have this convo again
 		return conversation;
@@ -326,6 +340,10 @@ public class ChatbotRaymond implements Topic {
 		} else {
 			ChatbotMain.print("Finally.. I hate talking with people who don't know anything about insects. GOOD BYE " + ChatbotMain.chatbot.getUsername());
 		}
-		ChatbotMain.chatbot.returnChatting();
+		if(madCount > happyCount) {
+			ChatbotMain.chatbot.returnChatting("Insect","Mad");
+		}else {
+			ChatbotMain.chatbot.returnChatting("Insect", "");
+		}
 	}
 }
