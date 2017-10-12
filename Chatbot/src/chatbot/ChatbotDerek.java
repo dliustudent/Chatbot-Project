@@ -1,10 +1,6 @@
 package chatbot;
 
 public class ChatbotDerek implements Topic {
-
-	private Topic Vincent;
-	private Topic David;
-	private Topic Raymond;
 	
 	private String[] keywords;
 	private String goodbyeKeyword;
@@ -15,12 +11,10 @@ public class ChatbotDerek implements Topic {
 	private String regularResponse;
 	private String[] love;
 	private String[] hate;
-	private boolean checkingOthers;
 	private boolean setFbackto0;
 	private String response2;
 	private String thingLiked;
 	private String initialWord;
-	//private String[] fact;
 	
 	public ChatbotDerek() {
 
@@ -36,8 +30,6 @@ public class ChatbotDerek implements Topic {
 		String[] d = {"hate", "dislike", "no"};
 		hate = d;
 		initialWord = "";
-//	String[] fac = {"Vincent is not a snake", "David is a monkey","Derek is not a turtle", "Raymond may be a lizard"};
-//		fact = fac;
 	}
 	
 	public boolean isTriggered(String response) {
@@ -58,7 +50,8 @@ public class ChatbotDerek implements Topic {
 		chatbotPrint("Hi, "+ a + "!" + " Reptiles are extremely cool! What reptile would you like to talk about?");
 		
 		response = ChatbotMain.getInput();
-									
+							
+		goodBye(response);
 		 while(!response.equals(goodbyeKeyword)) {
 				for(int i = 0 ; i < keywords.length ; i++) {
 					if(ChatbotMain.findKeyword(response, secretKeyword, 0) >= 0) {
@@ -91,13 +84,6 @@ public class ChatbotDerek implements Topic {
 		ChatbotMain.print(d);
 	}
 	
-	public void setFto0() {
-		if (setFbackto0 == false) {
-			f = 0;
-			System.out.println(f);
-		}
-	}
-	
 	public void talk2(String response) {
 		thingLiked = response;
 		regularResponse = response + " is/are very interesting. Do you like " + response+"?";
@@ -122,10 +108,9 @@ public class ChatbotDerek implements Topic {
                         chatbotPrint(("Oh...Lets talk about a different reptile then. Which one would you like to talk about?"));
                         break;
                     }else {
-                        chatbotPrint(("I don't know what your talking about. This is a yes or no question"));
+                        chatbotPrint(("Please type yes or no."));
                     } 
                 }
-                
             }
         }
         for(int j = 0 ; j < hate.length ; j++) {
@@ -133,30 +118,35 @@ public class ChatbotDerek implements Topic {
                 chatbotPrint("Aww, thats too bad! I don't think that" +thingLiked+ "sucks but whatever.");
                 copy(response2);
                 talk(response);
-                response = ChatbotMain.getInput();             
-            }
-        }
+                response = ChatbotMain.getInput();    
+         } 
     }
-	
-	
+}
+   
 	public void fact() {
-		if(thingLiked.equals( "lizard")) {
+		if(thingLiked.equals("lizard")) {
 			chatbotPrint("Do you often see lizards frequently taking their tongues in and out? They do it to smell. Yes, they smell by tasting the air around them. They can do this because they have something called as vomeronasal organ. Alright, lets talk about another reptile now.");
 		}
-		else if(thingLiked == "alligator") {
+		else if(thingLiked.equals("alligator")) {
 			chatbotPrint("Male American alligators average 8 to 10 feet long, while females tend to be slightly smaller. Very old males can get quite large, up to 15 feet long and weighing over 1,000 pounds. Alright, lets talk about another reptile now.");
 		}
-		else if(thingLiked == "turtle") {
+		else if(thingLiked.equals("turtle")) {
 			chatbotPrint("Turtles date back to the time of the dinosaurs, over 200 million years ago! Alright, lets talk about another reptile now.");
 		}
-		else if(thingLiked == "snake") {
+		else if(thingLiked.equals("snake")) {
 			chatbotPrint("Snakes kill over 40,000 people a year—though, with unreported incidents, the total may be over 100,000. About half of these deaths are in India. Alright, lets talk about another reptile now.");
 		}
-		else if(thingLiked == "crocodile") {
+		else if(thingLiked.equals("crocodile")) {
 			chatbotPrint("A crocodile's belly has gentle skin. The skin on their back contains bony structures (called osteoderms) which make skin bulletproof. Alright, lets talk about another reptile now.");
 		}
-		else if(thingLiked == "tortoise") {
+		else if(thingLiked.equals("tortoise")) {
 			chatbotPrint("Tortoises inspired the ancient Roman military. During seiges, soldiers would get in testudo formation, named after the Latin word for tortoise. The men formed rows and held shields in front or above them to completely shelter the unit. Alright, lets talk about another reptiles now.");
+		}
+	}
+	
+	public void goodBye(String response) {
+		if(ChatbotMain.findKeyword(response, goodbyeKeyword, 0) >= 0) {
+			ChatbotMain.chatbot.returnChatting("Reptiles","Normal");
 		}
 	}
 }
