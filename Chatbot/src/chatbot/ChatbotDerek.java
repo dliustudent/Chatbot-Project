@@ -116,11 +116,11 @@ public class ChatbotDerek implements Topic {
         for(int j = 0 ; j < hate.length ; j++) {
             if(ChatbotMain.findKeyword(response2, hate[j], 0) >= 0) {
                 chatbotPrint("Aww, thats too bad! I don't think that " +thingLiked+ " sucks but whatever.");
-                talk(response);
+                talk(response2);
                 boolean again2 = false;
                 while(again2 == false) {
-                    response = ChatbotMain.getInput();
-                    if(ChatbotMain.findKeyword(response, "no", 0) >=0) {
+                    response2 = ChatbotMain.getInput();
+                    if(ChatbotMain.findKeyword(response2, "no", 0) >=0) {
                         copy(response2);
                         again2 = true;}
                         else {
