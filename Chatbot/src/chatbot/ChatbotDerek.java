@@ -121,16 +121,6 @@ public class ChatbotDerek implements Topic {
                 while(again2 == false) {
                     response2 = ChatbotMain.getInput();
                 }
-                } else {
-             
-                	
-                        chatbotPrint("Please type no or yes");  
-                        emotion();
-                        break;
-                        
-                 
-                    
-               
            }
        }
    }
