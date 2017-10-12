@@ -86,7 +86,7 @@ public class ChatbotDerek implements Topic {
 	
 	public void talk2(String response) {
 		thingLiked = response;
-		regularResponse = response + " is/are very interesting. Do you like " + response+"?";
+		regularResponse = response + " is/are very interesting. Do you like " + response+"?(yes or no)";
 		chatbotPrint(regularResponse);
 		copy(response);
 		emotion();
@@ -125,7 +125,7 @@ public class ChatbotDerek implements Topic {
                         again2 = true;}
                         else {
                         	chatbotPrint("Please type no or yes");  
-                        	break;
+                    
                } 
            }
        }
