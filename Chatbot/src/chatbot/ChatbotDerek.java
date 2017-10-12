@@ -69,6 +69,7 @@ public class ChatbotDerek implements Topic {
 					}else if (ChatbotMain.findKeyword(response, keywords[i], 0) >= 0) {
 						talk2(response);
 						response = ChatbotMain.getInput();
+						i=-1;
 						copy(response);
 						
 					}
@@ -85,9 +86,9 @@ public class ChatbotDerek implements Topic {
 		}
 	} 
 	
-	public void chatbotPrint(String nanidesu) {
-		initialWord = nanidesu;
-		ChatbotMain.print(nanidesu);
+	public void chatbotPrint(String d) {
+		initialWord = d;
+		ChatbotMain.print(d);
 	}
 	
 	public void setFto0() {
@@ -99,58 +100,63 @@ public class ChatbotDerek implements Topic {
 	
 	public void talk2(String response) {
 		thingLiked = response;
-		regularResponse = response + " is/are very interesting. Do you like " + response;
+		regularResponse = response + " is/are very interesting. Do you like " + response+"?";
 		chatbotPrint(regularResponse);
 		copy(response);
 		emotion();
 	}
 	
 	public void emotion(){
-		response2 = ChatbotMain.getInput();
-		for(int i = 0 ; i < love.length ; i++) {
-		if(ChatbotMain.findKeyword(response2, love[i], 0) >= 0) {
-				chatbotPrint(("Wow! I like " +thingLiked+ " too! Do you want to hear a fact about " +thingLiked+ "?"));
-				response = ChatbotMain.getInput();
-				System.out.println(thingLiked);
-				copy(response2);
-				fact();
-			}
-		else {
-			chatbotPrint("Please type yes or no");
-			response = ChatbotMain.getInput();
-
-			emotion();
-		}
-		
-		}
-		for(int j = 0 ; j < hate.length ; j++) {
-			if(ChatbotMain.findKeyword(response2, hate[j], 0) >= 0) {
-				chatbotPrint("Aww, thats too bad! I don't think that" +thingLiked+ "sucks but whatever.");
-				copy(response2);
-				talk(response);
-				response = ChatbotMain.getInput();			 
-			}
-		}
-	}
+        response2 = ChatbotMain.getInput();
+        for(int i = 0 ; i < love.length ; i++) {
+        if(ChatbotMain.findKeyword(response2, love[i], 0) >= 0) {
+                chatbotPrint(("Wow! I like " +thingLiked+ " too! Do you want to hear a fact about " +thingLiked+ "?"));
+                boolean again = false;
+                while(again == false) {
+                    response = ChatbotMain.getInput();
+                    if(ChatbotMain.findKeyword(response, "yes", 0) >=0) {
+                        copy(response2);
+                        fact();
+                        again = true;
+                    }else if(ChatbotMain.findKeyword(response, "no", 0) >=0) {
+                        chatbotPrint(("Oh...Lets talk about a different reptile then. Which one would you like to talk about?"));
+                        break;
+                    }else {
+                        chatbotPrint(("I don't know what your talking about. This is a yes or no question"));
+                    }
+                }
+                
+            }
+        }
+        for(int j = 0 ; j < hate.length ; j++) {
+            if(ChatbotMain.findKeyword(response2, hate[j], 0) >= 0) {
+                chatbotPrint("Aww, thats too bad! I don't think that" +thingLiked+ "sucks but whatever.");
+                copy(response2);
+                talk(response);
+                response = ChatbotMain.getInput();             
+            }
+        }
+    }
+	
 	
 	public void fact() {
-		if(thingLiked == "lizard") {
-			chatbotPrint("Alligators are all igators made from apple himselfxd");
+		if(thingLiked.equals( "lizard")) {
+			chatbotPrint("Do you often see lizards frequently taking their tongues in and out? They do it to smell. Yes, they smell by tasting the air around them. They can do this because they have something called as vomeronasal organ. Alright, lets talk about another reptile now.");
 		}
-		if(thingLiked == "alligator") {
-			chatbotPrint("Alligators are all igators made from apple himselfxd");
+		else if(thingLiked == "alligator") {
+			chatbotPrint("Male American alligators average 8 to 10 feet long, while females tend to be slightly smaller. Very old males can get quite large, up to 15 feet long and weighing over 1,000 pounds. Alright, lets talk about another reptile now.");
 		}
-		if(thingLiked == "turtle") {
-			chatbotPrint("Alligators are all igators made from apple himselfxd");
+		else if(thingLiked == "turtle") {
+			chatbotPrint("Turtles date back to the time of the dinosaurs, over 200 million years ago! Alright, lets talk about another reptile now.");
 		}
-		if(thingLiked == "snake") {
-			chatbotPrint("Alligators are all igators made from apple himselfxd");
+		else if(thingLiked == "snake") {
+			chatbotPrint("Snakes kill over 40,000 people a year—though, with unreported incidents, the total may be over 100,000. About half of these deaths are in India. Alright, lets talk about another reptile now.");
 		}
-		if(thingLiked == "crocodile") {
-			chatbotPrint("Alligators are all igators made from apple himselfxd");
+		else if(thingLiked == "crocodile") {
+			chatbotPrint("A crocodile's belly has gentle skin. The skin on their back contains bony structures (called osteoderms) which make skin bulletproof. Alright, lets talk about another reptile now.");
 		}
-		if(thingLiked == "tortoise") {
-			chatbotPrint("Alligators are all igators made from apple himselfxd");
+		else if(thingLiked == "tortoise") {
+			chatbotPrint("Tortoises inspired the ancient Roman military. During seiges, soldiers would get in testudo formation, named after the Latin word for tortoise. The men formed rows and held shields in front or above them to completely shelter the unit. Alright, lets talk about another reptiles now.");
 		}
 	}
 }
