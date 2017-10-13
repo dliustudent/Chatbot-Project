@@ -70,6 +70,7 @@ public class ChatbotDerek implements Topic {
 				
 				 chatbotPrint("Try typing alligator, crocodile, lizard, snake, turtle, or tortoise");
 				 response = ChatbotMain.getInput();}
+		 		 copy(response);
 			}
 		 
 	public void copy(String s) {
@@ -114,23 +115,18 @@ public class ChatbotDerek implements Topic {
             }
         }
         for(int j = 0 ; j < hate.length ; j++) {
+        	
             if(ChatbotMain.findKeyword(response2, hate[j], 0) >= 0) {
-                chatbotPrint("Aww, thats too bad! I don't think that " +thingLiked+ " sucks but whatever. Next reptile.");
-                talk(response);
-                boolean again2 = false;
-                while(again2 == false) {
-                    response = ChatbotMain.getInput();
-                    if(ChatbotMain.findKeyword(response, "yes", 0) >=0) {
-                        copy(response2);
-                        again2 = true;}
-                        else {
-                        	chatbotPrint("Please type nonono or yes");  
-                        	break;
-               } 
-           }
-       }
-   }
-}
+            	
+                chatbotPrint("Aww, thats too bad! I don't think that " +thingLiked+ " sucks but whatever.");
+                talk(response);  
+                   response2 = ChatbotMain.getInput();
+                   copy(response2);              	
+            	}
+        	}
+		}
+
+
    
 	public void fact() {
 		if(thingLiked.equals("lizard")) {
