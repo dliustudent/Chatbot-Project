@@ -13,7 +13,7 @@ public class ChatbotDerek implements Topic {
 	private String[] hate;
 	private boolean setFbackto0;
 	private String response2;
-	private String thingLiked;
+	private String reptileLiked;
 	private String initialWord;
 	
 	public ChatbotDerek() {
@@ -86,7 +86,7 @@ public class ChatbotDerek implements Topic {
 	}
 	
 	public void talk2(String response) {
-		thingLiked = response;
+		reptileLiked = response;
 		regularResponse = response + " is/are very interesting. Do you like " + response+"?";
 		chatbotPrint(regularResponse);
 		goodBye(response);
@@ -98,7 +98,7 @@ public class ChatbotDerek implements Topic {
         response2 = ChatbotMain.getInput();
         for(int i = 0 ; i < love.length ; i++) {
         if(ChatbotMain.findKeyword(response2, love[i], 0) >= 0) {
-                chatbotPrint(("Wow! I like " +thingLiked+ " too! Do you want to hear a fact about " +thingLiked+ "?"));
+                chatbotPrint(("Wow! I like " +reptileLiked+ " too! Do you want to hear a fact about " +reptileLiked+ "?"));
                 goodBye(response);
                 boolean again = false;
                 while(again == false) {
@@ -121,7 +121,7 @@ public class ChatbotDerek implements Topic {
         	
             if(ChatbotMain.findKeyword(response2, hate[j], 0) >= 0) {
 
-                chatbotPrint("Aww, thats too bad! I don't think that " +thingLiked+ " sucks but whatever.");
+                chatbotPrint("Aww, thats too bad! I don't think that " +reptileLiked+ " sucks but whatever.");
                 talk(response);  
                    response2 = ChatbotMain.getInput();
                    copy(response2);              	
@@ -132,22 +132,22 @@ public class ChatbotDerek implements Topic {
 
    
 	public void fact() {
-		if(thingLiked.equals("lizard")) {
+		if(reptileLiked.equals("lizard")) {
 			chatbotPrint("Do you often see lizards frequently taking their tongues in and out? They do it to smell. Yes, they smell by tasting the air around them. They can do this because they have something called as vomeronasal organ. Alright, lets talk about another reptile now.");
 		}
-		else if(thingLiked.equals("alligator")) {
+		else if(reptileLiked.equals("alligator")) {
 			chatbotPrint("Male American alligators average 8 to 10 feet long, while females tend to be slightly smaller. Very old males can get quite large, up to 15 feet long and weighing over 1,000 pounds. Alright, lets talk about another reptile now.");
 		}
-		else if(thingLiked.equals("turtle")) {
+		else if(reptileLiked.equals("turtle")) {
 			chatbotPrint("Turtles date back to the time of the dinosaurs, over 200 million years ago! Alright, lets talk about another reptile now.");
 		}
-		else if(thingLiked.equals("snake")) {
+		else if(reptileLiked.equals("snake")) {
 			chatbotPrint("Snakes kill over 40,000 people a year—though, with unreported incidents, the total may be over 100,000. About half of these deaths are in India. Alright, lets talk about another reptile now.");
 		}
-		else if(thingLiked.equals("crocodile")) {
+		else if(reptileLiked.equals("crocodile")) {
 			chatbotPrint("A crocodile's belly has gentle skin. The skin on their back contains bony structures (called osteoderms) which make skin bulletproof. Alright, lets talk about another reptile now.");
 		}
-		else if(thingLiked.equals("tortoise")) {
+		else if(reptileLiked.equals("tortoise")) {
 			chatbotPrint("Tortoises inspired the ancient Roman military. During seiges, soldiers would get in testudo formation, named after the Latin word for tortoise. The men formed rows and held shields in front or above them to completely shelter the unit. Alright, lets talk about another reptiles now.");
 		}
 	}
