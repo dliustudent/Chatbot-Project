@@ -29,7 +29,7 @@ public class ChatbotDavid implements Topic {
 		String[] temp = {"birds","bird"};
 		keywords = temp;
 		
-		String[] uabirdlist = {"seagulls","seagull","blue jay","robin"};
+		String[] uabirdlist = {"seagulls","seagull","blue jay","robin","pigeon"};
 		nabird = uabirdlist;
 		
 		goodbyeKeyword = "bye";
@@ -42,7 +42,7 @@ public class ChatbotDavid implements Topic {
 		vulture = facts3;
 		hummingbird = facts4;
 		eaglesFacts = facts1;
-		String answer[] = {"yes","no","creepy","maybe"};
+		String answer[] = {"yes","no","creepy","maybe","okay"};
 		reply = answer;
 		likes = "";
 		dislikes = "";
@@ -96,7 +96,7 @@ public class ChatbotDavid implements Topic {
 					}
 					else
 					{
-						if(response.contains(reply[0]))
+						if(response.contains(reply[0])||response.contains(reply[4]))
 						{
 							likes = ""+"vultures ";
 							ChatbotMain.print("What?! You like vultures, well can you tell me why?");
@@ -265,7 +265,7 @@ public class ChatbotDavid implements Topic {
 		}
 			
 			
-		while(response.contains(reply[0]))
+		while(response.contains(reply[0])||response.contains(reply[4]))
 		{
 			ChatbotMain.print("Okay here is another fact did you know that"+" "+ eaglesFacts[questionNum] + " " + "So" + " " + ChatbotMain.chatbot.getUsername() + " " + "do you still want to talk about Eagles?" );
 					
@@ -406,7 +406,7 @@ public class ChatbotDavid implements Topic {
 				bird = "hummingbird";
 				likesOrDislikes(response);
 			}
-			if(response.contains(reply[0]))
+			if(response.contains(reply[0])||response.contains(reply[4]))
 			{
 				likes = ""+"eagle ";
 				ChatbotMain.print("What no way you like eagles too"+" "+"Did you know that"+" "+ eaglesFacts[0] + " " + "So" + " " + ChatbotMain.chatbot.getUsername() + " " + "do you still want to talk about Eagles?");
